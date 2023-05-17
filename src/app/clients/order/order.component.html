@@ -1,0 +1,169 @@
+   <!-- starts pay -->
+   <section class="order gird">
+    <form action="" method="post" #frmFormCustomer="ngForm" (submit)="order(frmFormCustomer)">
+        <div class="order_view">
+    
+            <div class="delivery_address">
+                <div class="address_input">
+                    <p class="title_address">Địa chỉ giao hàng</p>
+                    <div class="infor_address">
+                        
+                            <div class="infor_individual">
+                                <input type="text" required minlength="5" #fullName="ngModel" [(ngModel)]="checkout.customer.fullName" name="fullName" class="form-control" placeholder="Họ và tên">
+                                <div *ngIf="fullName.invalid && fullName.dirty" >
+                                    <strong *ngIf="fullName?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập họ tên</strong>
+                                    <strong *ngIf="fullName?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                                </div>
+
+                                <input type="text" required minlength="5" #numberPhone="ngModel" [(ngModel)]="checkout.customer.numberPhone" class="form-control" name="numberPhone" id="" placeholder="Số điện thoại">
+                                <div *ngIf="numberPhone.invalid && numberPhone.dirty" >
+                                    <strong *ngIf="numberPhone?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập số điện thoại</strong>
+                                    <strong *ngIf="numberPhone?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                                </div>
+                            </div>
+                            <div class="infor_city-district">
+                                <input type="text" #province="ngModel" required minlength="5" [(ngModel)]="checkout.customer.province" class="form-control" name="province" id="" placeholder="Tỉnh/Thành phố">
+                                <div *ngIf="province.invalid && province.dirty" >
+                                    <strong *ngIf="province?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập Tỉnh/Thành phố</strong>
+                                    <strong *ngIf="province?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                                </div>
+
+                                <input required minlength="5" #district="ngModel" [(ngModel)]="checkout.customer.district" type="text" class="form-control" name="district" id="" placeholder="Quận/Huyện">
+                                <div *ngIf="district.invalid && district.dirty" >
+                                    <strong *ngIf="district?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập Quận/Huyện</strong>
+                                    <strong *ngIf="district?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                                </div>
+                            </div>
+                            <input type="text" required minlength="5" #wards="ngModel" [(ngModel)]="checkout.customer.wards" name="wards" class="form-control" id="" placeholder="Phường/Xã">
+                            <div *ngIf="wards.invalid && wards.dirty" >
+                                <strong *ngIf="wards?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập Xã/Phường</strong>
+                                <strong *ngIf="wards?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                            </div>
+
+                            <input type="text" required minlength="5" #address="ngModel" [(ngModel)]="checkout.customer.address" name="address" class="form-control" id="" placeholder="Địa chỉ">
+                            <div *ngIf="address.invalid && address.dirty" >
+                                <strong *ngIf="address?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập địa chỉ</strong>
+                                <strong *ngIf="address?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                            </div>
+                    </div>
+                </div>
+                <div class="method_checks">   
+                    <p class="title_method_pay">Phương thức thanh toán</p>
+                    <div class="method_pay">
+                        <div class="method_pay_check">
+                            <p class="title_pay">Mọi giao dịch đều được bảo mật và mã hóa. Thông tin thẻ tín dụng sẽ không bao giờ được lưu lại.</p>
+                                <div class="pay_cart">
+                                    <input type="radio" [(ngModel)]="checkout.pay.methodPay" id="" name="method1" value="Thanh toán bằng thẻ tín dụng">
+                                    <label>Thanh toán bằng thẻ tín dụng</label>
+                                    <img src="https://pubcdn2.ivymoda.com/images/1.png" alt="">
+                                </div>
+                                <div class="pay_other">
+                                    <input type="radio" [(ngModel)]="checkout.pay.methodPay" id="" name="method2" value="Thanh toán qua thẻ ATM">
+                                    <label for="">Thanh toán qua thẻ ATM</label>
+                                </div>
+                                <div class="pay_other">
+                                    <input type="radio" id="" [(ngModel)]="checkout.pay.methodPay" name="method3" value="Thanh toán bằng Momo">
+                                    <label for="">Thanh toán bằng Momo</label>
+                                </div>
+                                <div class="pay_other">
+                                    <input type="radio" id="" [(ngModel)]="checkout.pay.methodPay" name="method4" value="Thanh toán khi giao hàng">
+                                    <label for="">Thanh toán khi giao hàng</label>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="total_order">
+                <div class="pay_summary">
+    
+                    <p class="title_pay_order">
+                        Tóm tắt đơn hàng
+                    </p>
+                    <div class="cart_summary">
+                        <div class="total_orverview_item">
+                            <p>Tổng tiền đơn hàng :</p>
+                            <p>{{checkout.totalPriceProduct}}<sub>đ</sub></p>
+                        </div>
+                        <div class="total_orverview_item">
+                            <p>Tạm tính :</p>
+                            <p>{{checkout.totalPriceProductSale}} <sub>đ</sub></p>
+                        </div>
+                        <div class="total_orverview_item">
+                            <p>Phí vận chuyển :</p>
+                            <p>0 <sub>đ</sub></p>
+                        </div>
+                        <div class="total_orverview_item">
+                            <p>Tiền thanh toán :</p>
+                            <p>{{checkout.totalPriceProductSale}} <sub>đ</sub></p>
+                        </div>
+                        
+                    </div>
+                    <p class="title_pay_code">
+                        Mã phiếu giảm giá
+                    </p>
+                    <div class="coupon_code">
+                        <input type="text" #discountCode="ngModel" [(ngModel)]="checkout.customer.discountCode" name="discountCode" id="" placeholder="Nhập mã">
+                    </div>
+                    <div class="button_pay">
+                        <button class="btnr" type="submit">Thanh toán đơn hàng</button>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <button class="btnr" type="button" (click)="openCartOrder()">Hiển thị sản phẩm</button>
+        <div class="show_product" *ngIf="open">
+            <div class="title_cart_order">
+                <span>
+                    Giỏ hàng của bạn
+                </span>
+            </div>
+            <div class="table_show_product">
+                <table>
+                    <tr class="title_table">
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Sale</th>
+                        <th>Mức giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                    </tr>
+                    <tbody *ngFor="let x of listOderCart">
+
+                        <tr class="detail_table" *ngFor="let i of x.carts;let n=index">
+                            <td class="image">
+                                <img src="../../../../assets/images/{{i.image}}" alt="">
+                            </td>
+                            <td class="name">
+                                <span>
+                                    {{i.name}}
+                                </span>
+                            </td>
+                            <td class="sale">
+                                <span *ngIf="i.sale>0">
+                                    (-{{i.sale}}%)
+                                </span>
+                            </td>
+                            <td class="price">
+                                <span>{{i.price}}<sub>đ</sub></span>
+                            </td>
+                            <td class="price">
+                               <span>
+                                {{i.amount}}
+                               </span>
+                            </td>
+                            <td class="total">
+                                <span>
+                                    {{i.amount*i.price}} <sub>đ</sub>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                
+            </div>
+        </div>
+    </form>
+    </section>
+<!-- ends pay -->

@@ -1,0 +1,71 @@
+
+  <div class="container orderAdmin"> 
+    <div *ngIf="listOrderCustomer_Admin.length<=0">
+        <h1 style="text-align: center;">Empty Order</h1>
+    </div>
+    <div class="product_order_admin" *ngIf="listOrderCustomer_Admin.length>0">
+       <table class="table">
+         <thead>
+           <tr>
+             <th scope="col">STT</th>
+             <th scope="col">Name customer</th>
+             <th scope="col">Purchase date</th>
+             <th scope="col">Total order</th>
+             <th scope="col">View</th>
+             <th scope="col"></th>
+           </tr>
+         </thead>
+         <tbody>
+            <ng-container *ngFor="let x of listOrderCustomer_Admin; let i=index;">
+                <tr >
+                     <td >{{i+1}}</td>
+                     <td>{{x.customer.fullName}}</td>
+                     <td>{{x.time}}</td>
+                     <td>{{x.totalPriceProductSale}}<sub>đ</sub> </td>
+                     <td><button type="button" class="btn btn-info" (click)="x.show=!x.show">View</button></td>
+                     <td><button type="button" class="btn btn-danger" (click)="deleteOrder(x,i)">Delete</button></td>
+                </tr>
+                <ng-container >
+  
+                  <table class="table show_detail" *ngIf="x.show" style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th scope="col">STT</th>
+                          <th scope="col">Name product</th>
+                          <th scope="col">Image product</th>
+                          <th scope="col">Amount product</th>
+                          <th scope="col">Price product</th>
+                          <th scope="col">Full name customer</th>
+                          <th>Number phone</th>
+                          <th>Province</th>
+                          <th>District</th>
+                          <th>Wards</th>
+                          <th>Address</th>
+                          <th>Discount Code</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let i of x.carts;let z=index; let m=index;">
+                            <td>{{z+1}}</td>
+                            <td>{{i.name}}</td>
+                            <td><img src="{{i.image}}" style="width: 150px;" alt=""></td>
+                            <td>{{i.amount}}</td>
+                            <td>{{i.price}}</td>
+                            <td> {{x.customer.fullName}}</td>
+                            <td>{{x.customer.numberPhone}}</td>
+                            <td>{{x.customer.province}}</td>
+                            <td>{{x.customer.district}}</td>
+                            <td> {{x.customer.wards}}</td>
+                            <td>{{x.customer.address}}</td>
+                            <th>{{x.customer.discountCode}}</th>
+                        </tr>
+                      </tbody>
+                  </table>
+                </ng-container >
+              </ng-container>
+              
+         </tbody>
+       </table>
+       <td><button type="button" class="btn btn-danger" (click)="deleteAllOrder()">DeletAll</button></td>
+    </div>
+ </div>

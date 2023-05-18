@@ -24,10 +24,10 @@
                         <span class="focus-input100" data-placeholder=""></span>
                         <ul *ngIf="passwordAdmin.invalid && passwordAdmin.dirty">
                             <strong *ngIf="passwordAdmin?.errors?.['required']" style="color: rgb(245, 119, 119);">Bạn cần nhập passwordAdmin</strong>
-                            <strong *ngIf="passwordAdmin?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 6 ký tự</strong> 
+                            <strong *ngIf="passwordAdmin?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong> 
                         </ul>
                     </div>
-    
+                    
                     <div class="container-login100-form-btn m-t-32">
                         <button class="login100-form-btn" type="submit" (click)="onRegister(frmLogin.value)">
                             Register

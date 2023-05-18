@@ -19,8 +19,6 @@ export class ProductDetailComponent implements OnInit {
 
   productDetail(){
     this.router.params.subscribe(data=>{
-      console.log(data['ID'],"d dầyc");
-      
       this.httpClient.getProductDetail(data['ID']).subscribe(data=>{
         console.log(data);
         

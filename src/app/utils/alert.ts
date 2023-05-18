@@ -15,3 +15,33 @@ export const ToastDeleteConfirm = (title: string, text?: string) => {
       cancelButtonText: 'Cancel',
     });
   };
+
+export const ToastSuccess=(title:string,time:number)=>{
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: `${title}`,
+    showConfirmButton: false,
+    timer: time
+  })
+}
+
+export const ToastWarning=(title:string,time:number)=>{
+  Swal.fire({
+    position: 'top-end',
+    icon: 'warning',
+    title: `${title}`,
+    showConfirmButton: false,
+    timer: time
+  })
+}
+
+export const ToastError=(title:string,time:number)=>{
+  Swal.fire({
+    position: 'top-end',
+    icon: 'error',
+    title: `${title}`,
+    showConfirmButton: false,
+    timer: time
+  })
+}

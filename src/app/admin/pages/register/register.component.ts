@@ -5,7 +5,7 @@ import { ApiAccountAdminService } from 'src/app/services/api_account/api-account
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Toast } from 'ngx-toastr';
-import { MESS_DELETE_CONFIRM, ToastDeleteConfirm } from 'src/app/utils/alert';
+import { MESS_DELETE_CONFIRM, ToastDeleteConfirm,ToastSuccess,ToastWarning,ToastError } from 'src/app/utils/alert';
 import { ACCOUNT_LOGIN, ACCOUNT_SAVE, DELETE } from 'src/app/utils/messages';
 @Component({
   selector: 'app-register',
@@ -17,40 +17,41 @@ export class RegisterComponentAccount implements OnInit{
   accountManage:accountAdmin=new accountAdmin();
 
   listAccountRegister:any[] = [];
+  arrayTest:any[]=[];
   ngOnInit(): void { 
     this.loadAccount();
+    // this.chetExitAccount();
   }
 
+  showSuccess() {
+    this.toastrService.success('Hello, world!', 'Success');
+  }
 
   loadAccount(){
     this.addAccount.getAllAccount().subscribe(data=>{
       this.listAccountRegister=data;
-      console.log(data,"hfagfagfa");
+      // console.log(data,"hfagfagfa");
       
     })
   }
 
   
-  onRegister(data:any){
-    
+  onRegister(data: any) {
     this.listAccountRegister.forEach((element: any) => {
-      if(data.adminName===element.adminName || data.passwordAdmin===element.passwordAdmin){
-        // this.handleWarning(ACCOUNT_LOGIN.account_exists,2000);
-        return ;
-      }
-      else if (data.adminName!=element.adminName && data.passwordAdmin!=element.passwordAdmin){
+      if(data.adminName === element.adminName){
+        this.handleWarning(ACCOUNT_LOGIN.account_exists,2000);
+        return; 
+      } else if (data.adminName !== element.adminName){
         this.addAccount.addAccount(data).subscribe(res=>{
           if(res){
-            // this.handleSuccess(ACCOUNT_SAVE.save_success,2000);
+            this.handleSuccess(ACCOUNT_SAVE.save_success,2000);
             this.loadAccount();
-            return ;
+            return;
           }
-         
         });    
       }
     });
   }
-
   
 
   deleteAccount(id:string){
@@ -72,27 +73,15 @@ export class RegisterComponentAccount implements OnInit{
 
 
   handleSuccess(text: string, timeout: number) {
-    this.toastrService.success(text, '', {
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      timeOut: timeout,
-    });
+    ToastSuccess(text,timeout);
   }
 
   handleWarning(text: string, timeout: number) {
-    this.toastrService.warning(text, '', {
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      timeOut: timeout,
-    });
+    ToastWarning(text,timeout)
   }
 
   handleErorr(text:string,timeout:number){
-    this.toastrService.error(text, '', {
-      positionClass: 'toast-bottom-right',
-      progressBar: true,
-      timeOut: timeout,
-    });
+    ToastError(text,timeout)
   }
 
 }

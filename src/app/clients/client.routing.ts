@@ -10,6 +10,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductMenComponent } from './product-men/product-men.component';
 import { ProductWomenComponent } from './product-women/product-women.component';
 import { ProductDetailMenComponent } from './product-detail-men/product-detail-men.component';
+import { ProductKidComponent } from './product-kid/product-kid.component';
+import { ProductKidDetailComponent } from './product-kid-detail/product-kid-detail.component';
 
 const routes: Routes = [
     {
@@ -32,6 +34,10 @@ const routes: Routes = [
             {
                 path:"product_men",
                 component:ProductMenComponent
+            },
+            {
+                path:"product_kid",
+                component:ProductKidComponent
             },
             {
                 path:"cart",
@@ -60,6 +66,10 @@ const routes: Routes = [
             {
                 path:"product_detail_men/:ID",
                 component:ProductDetailMenComponent
+            },
+            {
+                path:"product_kid/:ID",
+                component:ProductKidDetailComponent
             },
             {
                 path:"cart/:ID",

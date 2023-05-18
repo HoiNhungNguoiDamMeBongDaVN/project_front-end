@@ -35,7 +35,7 @@ export class ProductWomenComponent implements OnInit {
     this.httpClient.getAllProduct().subscribe(data =>{
       this.product_list=data;
       this.product_list.forEach((element:any) => {
-        if(element.set=="nữ"){
+        if(element.set=="women"){
           this.product_list_women.push(element);
         }
       });

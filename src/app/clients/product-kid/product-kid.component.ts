@@ -1,14 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
 
 @Component({
-  selector: 'app-product-men',
-  templateUrl: './product-men.component.html',
-  styleUrls: ['./product-men.component.scss']
+  selector: 'app-product-kid',
+  templateUrl: './product-kid.component.html',
+  styleUrls: ['./product-kid.component.scss']
 })
-export class ProductMenComponent implements OnInit {
-
+export class ProductKidComponent {
   constructor(private httpClient:ApiProductsService) { }
 
 
@@ -33,7 +33,7 @@ export class ProductMenComponent implements OnInit {
     this.httpClient.getAllProduct().subscribe(data =>{
       this.product_list=data;
       this.product_list.forEach((element:any) => {
-        if(element.set=="men"){
+        if(element.set=="kid"){
           this.product_list_men.push(element);
         }
       });

@@ -5,7 +5,7 @@
             <span>Name product :</span><br>
             <input type="text" name="name" #nameProduct="ngModel" [(ngModel)]="product.name" required minlength="1" placeholder="Name product">
             <div *ngIf="nameProduct.invalid && nameProduct.dirty" >
-                <strong *ngIf="nameProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập địa chỉ</strong>
+                <strong *ngIf="nameProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.name}}</strong>
                 <strong *ngIf="nameProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
             </div>
         </div>
@@ -13,7 +13,7 @@
             <span>Price product :</span><br>
             <input type="number" #priceProduct="ngModel" [(ngModel)]="product.price" name="price" required minlength="1" placeholder="Price product">
             <div *ngIf="priceProduct.invalid && priceProduct.dirty" >
-                <strong *ngIf="priceProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập địa chỉ</strong>
+                <strong *ngIf="priceProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.price}}</strong>
                 <strong *ngIf="priceProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <span>Amount product :</span><br>
             <input type="number" name="amount" [(ngModel)]="product.amount" #amountProduct="ngModel" required minlength="1" placeholder="Amount product">
             <div *ngIf="amountProduct.invalid && amountProduct.dirty" >
-                <strong *ngIf="amountProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập địa chỉ</strong>
+                <strong *ngIf="amountProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.amount}}</strong>
                 <strong *ngIf="amountProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <span>Sale product :</span><br>
             <input type="number" name="sale" #saleProduct="ngModel" [(ngModel)]="product.sale" required minlength="1" placeholder="Sale about %">
             <div *ngIf="saleProduct.invalid && saleProduct.dirty" >
-                <strong *ngIf="saleProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập địa chỉ</strong>
+                <strong *ngIf="saleProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.sale}}</strong>
                 <strong *ngIf="saleProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
             </div>
         </div>

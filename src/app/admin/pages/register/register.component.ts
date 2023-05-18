@@ -23,9 +23,6 @@ export class RegisterComponentAccount implements OnInit{
     // this.chetExitAccount();
   }
 
-  showSuccess() {
-    this.toastrService.success('Hello, world!', 'Success');
-  }
 
   loadAccount(){
     this.addAccount.getAllAccount().subscribe(data=>{
@@ -38,10 +35,10 @@ export class RegisterComponentAccount implements OnInit{
   
   onRegister(data: any) {
     this.listAccountRegister.forEach((element: any) => {
-      if(data.adminName === element.adminName){
+      if(data.adminName == element.adminName){
         this.handleWarning(ACCOUNT_LOGIN.account_exists,2000);
         return; 
-      } else if (data.adminName !== element.adminName){
+      } else if (data.adminName != element.adminName){
         this.addAccount.addAccount(data).subscribe(res=>{
           if(res){
             this.handleSuccess(ACCOUNT_SAVE.save_success,2000);
@@ -55,10 +52,9 @@ export class RegisterComponentAccount implements OnInit{
   
 
   deleteAccount(id:string){
-    
     ToastDeleteConfirm(MESS_DELETE_CONFIRM("account")).then((result:any)=>{
       this.addAccount.deleteAccount(id).subscribe(data=>{
-        if(data){
+        if(data.value){
           this.handleSuccess(DELETE.delete_success,2000);
           this.addAccount.listAccount=data;
           this.loadAccount();

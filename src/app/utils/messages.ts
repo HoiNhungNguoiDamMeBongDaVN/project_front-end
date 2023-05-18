@@ -12,3 +12,10 @@ export const ACCOUNT_SAVE={
     save_success:"Lưu thành công !",
     save_error:"Lưu thất bại !"
 }
+
+export const VALIDATE_FORM_PRODUCT={
+    name:"Bạn cần nhập tên sản phẩm",
+    price:"Bạn cần nhập giá sản phẩm",
+    amount:"Bạn cần nhập số lượng sản phẩm",
+    sale:"Bạn cần nhập sale sản phẩm"
+}

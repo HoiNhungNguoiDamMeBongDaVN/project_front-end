@@ -18,6 +18,8 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct_API(data:product){
+    console.log(data,"fgrrrdjdjoj9");
+    
     if(data.name==""){
       this.addProduct.addProduct(data).subscribe(data=>{
         this.router.navigateByUrl('admins/manage_product');
@@ -28,4 +30,12 @@ export class AddProductComponent implements OnInit {
     }
   }
 
+
+  selectedOption: any;
+  options: any[] = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' }
+  ];
+  
 }

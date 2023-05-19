@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Toast } from 'ngx-toastr';
 import { MESS_DELETE_CONFIRM, ToastDeleteConfirm,ToastSuccess,ToastWarning,ToastError } from 'src/app/utils/alert';
-import { ACCOUNT_LOGIN, ACCOUNT_SAVE, DELETE } from 'src/app/utils/messages';
+import { ACCOUNT_LOGIN, ACCOUNT_SAVE, DELETE,VALIDATE_FORM_ACCOUNT } from 'src/app/utils/messages';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,6 +18,8 @@ export class RegisterComponentAccount implements OnInit{
 
   listAccountRegister:any[] = [];
   arrayTest:any[]=[];
+  account:any;
+  count=0;
   ngOnInit(): void { 
     this.loadAccount();
     // this.chetExitAccount();
@@ -34,20 +36,33 @@ export class RegisterComponentAccount implements OnInit{
 
   
   onRegister(data: any) {
-    this.listAccountRegister.forEach((element: any) => {
-      if(data.adminName == element.adminName){
-        this.handleWarning(ACCOUNT_LOGIN.account_exists,2000);
-        return; 
-      } else if (data.adminName != element.adminName){
+    if(data.adminName==""){
+        this.handleWarning(VALIDATE_FORM_ACCOUNT.name,1000);
+    }
+    else if(data.passwordAdmin==""){
+      this.handleWarning(VALIDATE_FORM_ACCOUNT.pass,1000);
+    }
+    else{
+      this.count=this.listAccountRegister.length;
+      this.listAccountRegister.forEach((element: any) => {
+        if(data.adminName != element.adminName){
+          this.count-=1;
+          this.handleWarning(ACCOUNT_LOGIN.account_exists,1000);
+        }
+      });
+      if(this.count==0){
         this.addAccount.addAccount(data).subscribe(res=>{
-          if(res){
-            this.handleSuccess(ACCOUNT_SAVE.save_success,2000);
-            this.loadAccount();
-            return;
-          }
-        });    
+              if(res){
+                this.handleSuccess(ACCOUNT_SAVE.save_success,2000);
+                this.loadAccount();
+                return;
+              }
+            });
       }
-    });
+      else if (this.account >0){
+          this.handleWarning(ACCOUNT_LOGIN.account_exists,2000);
+      }
+    }
   }
   
 
@@ -66,7 +81,6 @@ export class RegisterComponentAccount implements OnInit{
       });
     })
   }
-
 
   handleSuccess(text: string, timeout: number) {
     ToastSuccess(text,timeout);

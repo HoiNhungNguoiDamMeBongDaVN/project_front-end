@@ -1,3 +1,6 @@
+
+import { Set_product } from "./set_setxProduct.model";
+
 export class product{
     public id:string="";
     public name:string="";

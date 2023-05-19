@@ -21,6 +21,15 @@
             <span>Image product :</span><br>
             <input type="text" name="image" [(ngModel)]="product.image"   placeholder="Image product" >
         </div>
+
+
+        <input type="radio" [(ngModel)]="product.set" id="" name="set1" value="men">
+        <label>Nam</label>
+        <input type="radio" [(ngModel)]="product.set" id="" name="set2" value="women">
+        <label>Nữ</label>
+        <input type="radio" [(ngModel)]="product.set" id="" name="set3" value="kid">
+        <label>Trẻ em</label>
+
         <div class="input_name_pro">
             <span>Amount product :</span><br>
             <input type="number" name="amount" [(ngModel)]="product.amount" #amountProduct="ngModel" required minlength="1" placeholder="Amount product">

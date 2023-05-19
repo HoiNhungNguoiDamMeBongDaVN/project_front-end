@@ -19,3 +19,8 @@ export const VALIDATE_FORM_PRODUCT={
     amount:"Bạn cần nhập số lượng sản phẩm",
     sale:"Bạn cần nhập sale sản phẩm"
 }
+
+export const VALIDATE_FORM_ACCOUNT={
+    name:"Bạn cần nhập tên tài khoản",
+    pass:"Bạn cần nhập password"
+}

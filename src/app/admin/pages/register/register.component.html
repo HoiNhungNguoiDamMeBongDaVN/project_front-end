@@ -1,0 +1,69 @@
+
+<div class="limiter">
+    <div class="full_regis">
+
+        <div class="container-login100" >
+            <div class="wrap-login100 p-t-30 p-b-50">
+                <span class="login100-form-title p-b-41">
+                    Account Login
+                </span>
+                <form class="login100-form validate-form p-b-33 p-t-5" #frmLogin="ngForm"  method="post">
+    
+                    <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                        <input class="input100" required minlength="5" #adminName="ngModel" [(ngModel)]="accountManage.adminName"  name="name" type="text" name="adminName" placeholder="User name">
+                        <span class="focus-input100" data-placeholder=""></span>
+                        <ul *ngIf="adminName.invalid && adminName.dirty">
+                            <strong *ngIf="adminName?.errors?.['required']" style="color: rgb(245, 119, 119);">Bạn cần nhập  adminName</strong>
+                            <strong *ngIf="adminName?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+                        </ul>
+                    </div>
+    
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        
+                        <input class="input100" type="text" required minlength="5"  #passwordAdmin="ngModel" [(ngModel)]="accountManage.passwordAdmin" name="passwordAdmin" placeholder="Password">
+                        <span class="focus-input100" data-placeholder=""></span>
+                        <ul *ngIf="passwordAdmin.invalid && passwordAdmin.dirty">
+                            <strong *ngIf="passwordAdmin?.errors?.['required']" style="color: rgb(245, 119, 119);">Bạn cần nhập passwordAdmin</strong>
+                            <strong *ngIf="passwordAdmin?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong> 
+                        </ul>
+                    </div>
+                    
+                    <div class="container-login100-form-btn m-t-32">
+                        <button class="login100-form-btn" type="submit" (click)="onRegister(frmLogin.value)">
+                            Register
+                        </button>
+                       
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="container list_admin_account">
+                <div *ngIf="listAccountRegister.length >0">
+                    <h2 style="text-align: center;">List Account</h2>
+                    <table class="table" style="width: 100%;">
+                        <thead>
+                          <tr>
+                            <th scope="col">Stt</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let x of listAccountRegister;let i=index;">
+                           <th scope="row">{{i+1}}</th>
+                           <td>{{x.adminName}}</td>
+                           <td>{{x.passwordAdmin}}</td>
+                           <td><button type="button" class="login102-form-btn" (click)="deleteAccount(x.id_account)">Delete</button></td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h2 style="text-align: center;" *ngIf="listAccountRegister.length<=0">List Account Empty</h2>
+                </div>
+             </div>
+        </div>
+    </div>
+    
+</div>

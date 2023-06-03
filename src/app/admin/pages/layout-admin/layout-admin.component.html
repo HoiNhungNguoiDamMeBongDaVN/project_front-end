@@ -1,0 +1,66 @@
+  <!-- starts header admin -->
+  <section class="header_admin">
+    <div class="item">
+        <div class="item_logo">
+            <p>Ivy MODA</p>
+            <div class="search_icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="search_Admin" placeholder="Search here">
+            </div>
+        </div>
+        <div class="item_icon">
+            <div class="notifi">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+            <div class="massage">
+                <i class="fa-regular fa-comment" [routerLink]="[ 'chats_customer' ]" routerLinkActive="active"></i>
+            </div>
+            <div class="login_admin">
+                <i class="fa-solid fa-arrow-right" (click)="logoutAccount()"></i>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ends header admin -->
+
+
+ <!-- starts navbar admin -->
+ <section class="body_admin">
+    <nav class="nav_list">
+        <ul class="nav_icon">
+            <li style="--i:#a955ff;--j:#ea51ff;" [routerLink]="[ 'manage_product' ]" routerLinkActive="active">
+                <span class="icon"><i style="color:#a955ff;" class="fa-solid fa-house"></i></span>
+                <span class="title">manage</span>
+            </li>
+            
+        </ul>
+        <ul class="nav_icon">
+            <li style="--i:#56CCF2;--j:#2F80ED;" [routerLink]="[ 'add_product' ]" routerLinkActive="active">
+                <span class="icon"><i style="color:#2198bf;" class="fa-solid fa-gift"></i></span>
+                <span  class="title">Add product</span>
+            </li>
+        </ul>
+        <ul class="nav_icon"> 
+            <li style="--i:#FF9966;--j:#FF5E62;" [routerLink]="[ 'order_cutomer' ]" routerLinkActive="active">
+            <span class="icon"><i style="color:#e26424;" class="fa-solid fa-calendar-check"></i></span> 
+            <span class="title">Order</span>
+            </li>
+        </ul>
+        <ul class="nav_icon">
+            <li style="--i:#80FF72;--j:#7EE8FA;" [routerLink]="[ 'charts_admin' ]" routerLinkActive="active">
+                <span class="icon"><i style="color:#4bcf3c;" class="fa-solid fa-chart-simple"></i></span>
+                <span class="title">Charts</span>
+            </li>
+        </ul>
+        <ul class="nav_icon">
+            <li style="--i:#ffa9c6;--j:#f434e2;" [routerLink]="[ 'register' ]" routerLinkActive="active">
+                <span class="icon"><i style="color:#d07d99;" class="fa-solid fa-user"></i></span>
+                <span class="title">Account</span>
+            </li>
+        </ul>
+    </nav>
+    <div class="activity">
+        <router-outlet></router-outlet>
+    </div>
+</section>
+<!-- ends navbar admin -->

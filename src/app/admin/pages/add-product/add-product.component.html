@@ -1,0 +1,52 @@
+<div class="input_infor_pro">
+    <form action="" #formProduct="ngForm" (submit)="addProduct_API(formProduct.value)" method="post">
+        <p>Add product</p>
+        <div class="input_name_pro">
+            <span>Name product :</span><br>
+            <input type="text" name="name" #nameProduct="ngModel" [(ngModel)]="product.name" required minlength="1" placeholder="Name product">
+            <div *ngIf="nameProduct.invalid && nameProduct.dirty" >
+                <strong *ngIf="nameProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.name}}</strong>
+                <strong *ngIf="nameProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+            </div>
+        </div>
+        <div class="input_name_pro">
+            <span>Price product :</span><br>
+            <input type="number" #priceProduct="ngModel" [(ngModel)]="product.price" name="price" required minlength="1" placeholder="Price product">
+            <div *ngIf="priceProduct.invalid && priceProduct.dirty" >
+                <strong *ngIf="priceProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.price}}</strong>
+                <strong *ngIf="priceProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+            </div>
+        </div>
+        <div class="input_name_pro"> 
+            <span>Image product :</span><br>
+            <input type="text" name="image" [(ngModel)]="product.image"   placeholder="Image product" >
+        </div>
+
+
+        <input type="radio" [(ngModel)]="product.set" id="" name="set1" value="men">
+        <label>Nam</label>
+        <input type="radio" [(ngModel)]="product.set" id="" name="set2" value="women">
+        <label>Nữ</label>
+        <input type="radio" [(ngModel)]="product.set" id="" name="set3" value="kid">
+        <label>Trẻ em</label>
+
+        <div class="input_name_pro">
+            <span>Amount product :</span><br>
+            <input type="number" name="amount" [(ngModel)]="product.amount" #amountProduct="ngModel" required minlength="1" placeholder="Amount product">
+            <div *ngIf="amountProduct.invalid && amountProduct.dirty" >
+                <strong *ngIf="amountProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.amount}}</strong>
+                <strong *ngIf="amountProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+            </div>
+        </div>
+        <div class="input_name_pro">
+            <span>Sale product :</span><br>
+            <input type="number" name="sale" #saleProduct="ngModel" [(ngModel)]="product.sale" required minlength="1" placeholder="Sale about %">
+            <div *ngIf="saleProduct.invalid && saleProduct.dirty" >
+                <strong *ngIf="saleProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.sale}}</strong>
+                <strong *ngIf="saleProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-info">Add</button>
+    </form>
+</div>

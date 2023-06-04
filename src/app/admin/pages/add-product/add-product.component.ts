@@ -20,7 +20,7 @@ export class AddProductComponent implements OnInit {
   addProduct_API(data:product){
     console.log(data,"fgrrrdjdjoj9");
     
-    if(data.name==""){
+    if(data.name!=""){
       this.addProduct.addProduct(data).subscribe(data=>{
         this.router.navigateByUrl('admins/manage_product');
       })

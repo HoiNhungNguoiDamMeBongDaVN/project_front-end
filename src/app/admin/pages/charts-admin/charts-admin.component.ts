@@ -32,19 +32,21 @@ export class ChartsAdminComponent implements OnInit {
     this.pushTotalOrder();
     this.pushTotalRevenueOrder();
     this.pushTotalProductSell();
-    //this.pushTotalAccount();
+    // this.pushTotalAccount();
     this.chart();
   }
-
+  ngOnChange(){
+    
+  }
   chart(){
     const myChart = new Chart("myChart", {
       type: 'bar',
       data: {
-          labels: ['Tổng đơn hàng', 'Tổng danh thu', 'Tổng sản phẩm được bán', 'Account đã đăng ký'],
+          labels: ['Tổng đơn hàng', 'Tổng danh thu', 'Tổng sản phẩm được bán',],
           
           datasets: [{
               label:'Chỉ số',
-              data: [this.totalOrder,this.totalRevenue,this.totalProductSell,this.totalAccount],
+              data: [this.totalOrder,this.totalRevenue,this.totalProductSell],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -74,13 +76,22 @@ export class ChartsAdminComponent implements OnInit {
 
   loadOrder(){
     this.arrayOrder=this.orderChart.loadOrder();
-
   }
 
   loadAccount(){
+    
+    let total=0;
+    let allTotal=0;
     this.httpAccount.getAllAccount().subscribe(data=>{
       this.arrayAccount=data;
-    })
+      for (let x = 0; x < this.arrayAccount.length; x++) {
+        total+=1;
+      }
+      allTotal=total;
+      console.log(allTotal,"okok");
+      this.pushTotalAccount(allTotal);
+    });
+    
   }
 
   pushTotalOrder(){
@@ -107,15 +118,17 @@ export class ChartsAdminComponent implements OnInit {
       total+=element;
     }
     this.totalProductSell=total;
-    console.log(this.totalProductSell);
   }
 
-  // pushTotalAccount(){
-  //   let total=0;
-  //   for (let x = 0; x < this.arrayAccount.length; x++) {
-  //     total+=1;
-  //   }
-  //   this.totalAccount=total;
-  //   console.log(this.totalAccount);
-  // }
+  pushTotalAccount(number:number){
+
+    
+    // let total=0;
+    // for (let x = 0; x < this.arrayAccount.length; x++) {
+    //   total+=1;
+    // }
+    this.totalAccount=number;
+    console.log(this.totalAccount,"o day ne");
+    
+  }
 }

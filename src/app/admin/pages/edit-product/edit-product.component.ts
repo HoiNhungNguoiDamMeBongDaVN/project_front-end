@@ -39,6 +39,8 @@ export class EditProductComponent implements OnInit {
 
   EditProduct_API(x:any){
     this.active.params.subscribe(data=>{
+      console.log(data,"ê");
+      
         this.pro=data['ID'];
         this.editProduct.editProduct(this.pro,x).subscribe(data=>{
           this.router.navigateByUrl("/admins/manage_product");

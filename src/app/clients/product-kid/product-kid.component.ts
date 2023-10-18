@@ -9,58 +9,105 @@ import { ApiProductsService } from 'src/app/services/api_products/api-product.se
   styleUrls: ['./product-kid.component.scss']
 })
 export class ProductKidComponent {
-  constructor(private httpClient:ApiProductsService) { }
+  constructor(private productService: ApiProductsService) { }
 
 
 
-  p:number=0;
-  i:number=5;
+  p: number = 0;
+  i: number = 5;
 
-  product_list:[]|any;
-  product_list_men: any[] = [];
-  @Input() childMessage:string | undefined;
+  product_list: [] | any;
+  product_list_kid: any[] = [];
+  listColor: any[] = [];
+  listSize: any[] = [];
+  listGetSize: any[] = [];
+  listGetColor: any[] = [];
+  // listProductFilter: any[] = [];
+  dataSendApi: any[] = [];
 
-  public searchName = new Subject<string>();
+  @Input() childMessage: string | undefined;
 
 
-  public fillterName = '';
 
   ngOnInit(): void {
-    this.getData();
-  } 
+    this.getProductKid();
+    this.getAllColor();
+    this.getAllSize();
+  }
 
-  getData(){ 
-    this.httpClient.getAllProduct().subscribe(data =>{
-      this.product_list=data;
-      this.product_list.forEach((element:any) => {
-        if(element.set=="kid"){
-          this.product_list_men.push(element);
-        }
-      });
+  getProductKid() {
+    this.productService.getAllProduct().subscribe(data => {
+      if (data && data.errCode === 0) {
+        this.product_list = data.data;
+        this.product_list.forEach((element: any) => {
+          if (element.type_pro_sex == "kid") {
+            this.product_list_kid.push(element);
+          }
+        });
+      }
     })
   }
 
-  loadRouter(){
+  getAllColor() {
+    this.productService.getAllColor().subscribe(data => {
+      if (data && data.errCode === 0) {
+        this.listColor = data.data;
+      }
+    })
+  }
+
+  getAllSize() {
+    this.productService.getAllSize().subscribe(data => {
+      if (data && data.errCode === 0) {
+        this.listSize = data.data;
+        console.log(this.product_list_kid);
+        
+      }
+    })
+  }
+
+  getSizeValue(size: any) {
+    this.listGetSize.push(size.name_s);
+  }
+
+  getColorValue(color: any) {
+    this.listGetColor.push(color);
+  }
+
+  filterProduct() {
+    let data = {};
+    if (this.listGetSize.length > 0 || this.listGetColor.length > 0) {
+      data = {
+        size: this.listGetSize,
+        color: this.listGetColor,
+        type_sex: "kid"
+      };
+      this.productService.filterProduct({ data: data }).subscribe(data => {
+        if (data && data.errCode === 0) {
+          this.product_list_kid = data.data;
+        }
+      })
+    }
+  }
+
+
+  cancelFilterProduct() {
+    if (this.listGetSize.length > 0 || this.listGetColor.length > 0) {
+      this.product_list_kid = [];
+      this.getProductKid();
+      this.listGetSize = [];
+      this.listGetColor = [];
+
+    }
+  }
+
+  loadRouter() {
     location.replace("/clients/cart");
   }
 
-  // filterNameArray() { 
-  //   this.searchName.pipe(
-  //     debounceTime(1000),
-  //     distinctUntilChanged()).subscribe(childMessage => {
-  //       this.search.searchNameProduct = childMessage.trim().toLowerCase();
-  //       console.log(this.search.searchNameProduct);
-  //       if (this.search.searchNameProduct.length > 0) {
-  //           this.product_list_women = this.product_list_women.filter((data: { name: any; }) => data.name.toString().toLowerCase().includes(this.search.searchNameProduct));
-  //       }
-  //       if (this.search.searchNameProduct.length <= 0) { 
-  //         this.getData();
-  //       }
-  //     });
-  // }
 
-  pageChangeEvent(event:number){
-    this.p=event;
+  pageChangeEvent(event: number) {
+    this.p = event;
   }
 
 }

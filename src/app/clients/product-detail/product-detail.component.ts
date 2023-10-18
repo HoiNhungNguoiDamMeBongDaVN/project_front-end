@@ -9,7 +9,7 @@ import { ApiProductsService } from 'src/app/services/api_products/api-product.se
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-
+  listSize:[]|any;
   proDetail:{}|any;
   constructor(private router:ActivatedRoute,private httpClient:ApiProductsService) { }
  
@@ -20,9 +20,10 @@ export class ProductDetailComponent implements OnInit {
   productDetail(){
     this.router.params.subscribe(data=>{
       this.httpClient.getProductDetail(data['ID']).subscribe(data=>{
-        console.log(data);
-        
-        this.proDetail=data;
+        if(data && data.errCode===0){
+          this.proDetail=data.data;
+          this.listSize = data.data[0].size;
+        }
       })
     })
   }

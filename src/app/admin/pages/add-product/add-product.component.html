@@ -1,52 +1,193 @@
-<div class="input_infor_pro">
-    <form action="" #formProduct="ngForm" (submit)="addProduct_API(formProduct.value)" method="post">
-        <p>Add product</p>
-        <div class="input_name_pro">
-            <span>Name product :</span><br>
-            <input type="text" name="name" #nameProduct="ngModel" [(ngModel)]="product.name" required minlength="1" placeholder="Name product">
-            <div *ngIf="nameProduct.invalid && nameProduct.dirty" >
-                <strong *ngIf="nameProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.name}}</strong>
-                <strong *ngIf="nameProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+<form action="" [formGroup]="form" (submit)="addProduct_API(form)" method="post">
+    <div class="input_infor_pro row">
+        <p class="title">Add product</p>
+        <div class="input_item col-lg-3">
+            <span>Tên sản phẩm :</span><br>
+            <div class="input_text">
+                <i class="fas fa-signature"></i>
+                <input type="text" class="form-control" name="name_pro" formControlName="name_pro" id="name_pro"
+                    [ngClass]="{
+                    'is-invalid':
+                      form.controls['name_pro'].hasError('maxlength') ||
+                      (form.controls['name_pro'].hasError('required') &&
+                        form.controls['name_pro'].touched),
+                    'is-valid':
+                      form.controls['name_pro'].touched &&
+                      !form.controls['name_pro'].hasError('maxlength') &&
+                      !form.controls['name_pro'].hasError('required'),
+                    'form-control': true
+                  }" placeholder="Tên sản phẩm">
+                <ng-container class="invalid-feedback"
+                    *ngIf="form.get('name_pro')?.invalid || form.get('name_pro')?.touched">
+                    <div class="invalid-feedback" style="margin-top: unset">
+                        <span class="style-error" *ngIf="form.controls['name_pro'].hasError('required')">{{
+                            Validate_form.name_pro }}</span>
+                        <!-- <span
+                    class="style-error"
+                    *ngIf="form.controls['name_pro'].hasError('maxlength')"
+                  >
+                    {{ Validate_form.maxLength }}
+                  </span> -->
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+        <div class="input_item_checkbox col-lg-3">
+            <span>Loại sản phẩm :</span>
+            <div class="item">
+                <input type="radio" formControlName="type_sex" id="" name="type_sex" value="men">
+                <label>Nam</label>
+            </div>
+            <div class="item">
+                <input type="radio" formControlName="type_sex" id="" name="type_sex" value="women">
+                <label>Nữ</label>
+            </div>
+            <div class="item">
+                <input type="radio" formControlName="type_sex" id="" name="type_sex" value="kid">
+                <label>Trẻ em</label>
             </div>
         </div>
-        <div class="input_name_pro">
-            <span>Price product :</span><br>
-            <input type="number" #priceProduct="ngModel" [(ngModel)]="product.price" name="price" required minlength="1" placeholder="Price product">
-            <div *ngIf="priceProduct.invalid && priceProduct.dirty" >
-                <strong *ngIf="priceProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.price}}</strong>
-                <strong *ngIf="priceProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+        <div class="input_item col-lg-3">
+            <span>Hình ảnh :</span><br>
+            <div class="input_text">
+                <i class="far fa-images"></i>
+                <input type="file" class="form-control" formControlName="image" (change)="handleImage($event)" id="image_pro"
+                    placeholder="Ảnh sản phẩm">
             </div>
+
         </div>
-        <div class="input_name_pro"> 
-            <span>Image product :</span><br>
-            <input type="text" name="image" [(ngModel)]="product.image"   placeholder="Image product" >
+        <div class="input_item col-lg-3">
+            <span>Giá :</span><br>
+            <div class="input_text">
+                <i class="fas fa-dollar-sign"></i>
+                <input type="number" class="form-control" name="price" formControlName="price" id="price" [ngClass]="{
+                    'is-invalid':
+                      form.controls['price'].hasError('maxlength') ||
+                      (form.controls['price'].hasError('required') &&
+                        form.controls['price'].touched),
+                    'is-valid':
+                      form.controls['price'].touched &&
+                      !form.controls['price'].hasError('maxlength') &&
+                      !form.controls['price'].hasError('required'),
+                    'form-control': true
+                  }" placeholder="Giá">
+                <ng-container class="invalid-feedback" *ngIf="form.get('price')?.invalid || form.get('price')?.touched">
+                    <div class="invalid-feedback" style="margin-top: unset">
+                        <span class="style-error" *ngIf="form.controls['price'].hasError('required')">{{
+                            Validate_form.price }}</span>
+                        <!-- <span
+                    class="style-error"
+                    *ngIf="form.controls['name_pro'].hasError('maxlength')"
+                  >
+                    {{ Validate_form.maxLength }}
+                  </span> -->
+                    </div>
+                </ng-container>
+            </div>
+
+        </div>
+        <div class="input_item col-lg-3">
+            <span>Sale :</span><br>
+            <div class="input_text">
+                <i class="fas fa-percent"></i>
+                <input type="number" class="form-control" name="sale" formControlName="sale" id="sale" [ngClass]="{
+                    'is-invalid':
+                      form.controls['sale'].hasError('maxlength') ||
+                      (form.controls['sale'].hasError('required') &&
+                        form.controls['sale'].touched),
+                    'is-valid':
+                      form.controls['sale'].touched &&
+                      !form.controls['sale'].hasError('maxlength') &&
+                      !form.controls['sale'].hasError('required'),
+                    'form-control': true
+                  }" placeholder="Mức sale">
+                <ng-container class="invalid-feedback" *ngIf="form.get('sale')?.invalid || form.get('sale')?.touched">
+                    <div class="invalid-feedback" style="margin-top: unset">
+                        <span class="style-error" *ngIf="form.controls['sale'].hasError('required')">{{
+                            Validate_form.sale }}</span>
+                        <!-- <span
+                    class="style-error"
+                    *ngIf="form.controls['name_pro'].hasError('maxlength')"
+                  >
+                    {{ Validate_form.maxLength }}
+                  </span> -->
+                    </div>
+                </ng-container>
+            </div>
         </div>
 
+        <div class="input_item col-lg-3">
+            <span>Số lượng :</span><br>
+            <div class="input_text">
+                <i class="fas fa-sort-numeric-up-alt"></i>
+                <input type="number" class="form-control" name="quantity" formControlName="quantity" id="quantity"
+                    [ngClass]="{
+                    'is-invalid':
+                      form.controls['quantity'].hasError('maxlength') ||
+                      (form.controls['quantity'].hasError('required') &&
+                        form.controls['quantity'].touched),
+                    'is-valid':
+                      form.controls['quantity'].touched &&
+                      !form.controls['quantity'].hasError('maxlength') &&
+                      !form.controls['quantity'].hasError('required'),
+                    'form-control': true
+                  }" placeholder="Số lượng">
+                <ng-container class="invalid-feedback"
+                    *ngIf="form.get('quantity')?.invalid || form.get('quantity')?.touched">
+                    <div class="invalid-feedback" style="margin-top: unset">
+                        <span class="style-error" *ngIf="form.controls['quantity'].hasError('required')">{{
+                            Validate_form.quantity }}</span>
+                        <!-- <span
+                    class="style-error"
+                    *ngIf="form.controls['name_pro'].hasError('maxlength')"
+                  >
+                    {{ Validate_form.maxLength }}
+                  </span> -->
+                    </div>
+                </ng-container>
+            </div>
 
-        <input type="radio" [(ngModel)]="product.set" id="" name="set" value="men">
-        <label>Nam</label>
-        <input type="radio" [(ngModel)]="product.set" id="" name="set" value="women">
-        <label>Nữ</label>
-        <input type="radio" [(ngModel)]="product.set" id="" name="set" value="kid">
-        <label>Trẻ em</label>
+        </div>
 
-        <div class="input_name_pro">
-            <span>Amount product :</span><br>
-            <input type="number" name="amount" [(ngModel)]="product.amount" #amountProduct="ngModel" required minlength="1" placeholder="Amount product">
-            <div *ngIf="amountProduct.invalid && amountProduct.dirty" >
-                <strong *ngIf="amountProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.amount}}</strong>
-                <strong *ngIf="amountProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+        <div class="input_item col-lg-3">
+            <span>Size :</span><br>
+            <div class="list_size_pro">
+                <div *ngFor="let item of listSize">
+                    <button type="button" (click)="getSizeValue(item)" class="size_but">{{item.name_s}}</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="input_item col-lg-3">
+            <span>Màu sắc :</span><br>
+            <div class="list_color">
+                <div *ngFor="let item of listColor">
+                    <span class="color_but" (click)="getColorValue(item.code_color)"
+                        [style.background-color]="item.code_color"></span>
+                </div>
             </div>
         </div>
-        <div class="input_name_pro">
-            <span>Sale product :</span><br>
-            <input type="number" name="sale" #saleProduct="ngModel" [(ngModel)]="product.sale" required minlength="1" placeholder="Sale about %">
-            <div *ngIf="saleProduct.invalid && saleProduct.dirty" >
-                <strong *ngIf="saleProduct?.errors?.['required']" style="color: rgb(241, 57, 57);">{{Validate_form.sale}}</strong>
-                <strong *ngIf="saleProduct?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
+
+        <div class="input_item col-lg-6">
+            <label for="description" class="form-label">Giới thiệu :</label>
+            <textarea class="form-control" formControlName="des" name="des" id="exampleFormControlTextarea1"
+                rows="3"></textarea>
+        </div>
+        <div class="input_item_checkbox col-lg-6">
+            <span>Trạng thái sản phẩm :</span>
+            <div class="item">
+                <input type="radio" formControlName="status" id="" name="status" value="business">
+                <label>Kinh doanh</label>
+            </div>
+            <div class="item">
+                <input type="radio" formControlName="status" id="" name="status" value="inventory">
+                <label>Tồn kho</label>
             </div>
         </div>
-        <br>
-        <button type="submit" class="btn btn-info">Add</button>
-    </form>
-</div>
+    </div>
+    <div class="button_submit">
+        <button type="submit" class="button_add_pro">Add</button>
+    </div>
+</form>

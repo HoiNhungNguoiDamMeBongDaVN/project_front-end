@@ -10,7 +10,7 @@ import { ApiProductsService } from 'src/app/services/api_products/api-product.se
 })
 export class ProductWomenComponent implements OnInit {
 
-  constructor(private httpClient:ApiProductsService) { }
+  constructor(private productService:ApiProductsService) { }
 
 
 
@@ -28,17 +28,19 @@ export class ProductWomenComponent implements OnInit {
   public fillterName = '';
   product_list_women: any[] = [];
   ngOnInit(): void {
-    this.getData();
+    this.getProductWoment();
   } 
 
-  getData(){ 
-    this.httpClient.getAllProduct().subscribe(data =>{
-      this.product_list=data;
-      this.product_list.forEach((element:any) => {
-        if(element.set=="women"){
-          this.product_list_women.push(element);
-        }
-      });
+  getProductWoment(){ 
+    this.productService.getAllProduct().subscribe(data =>{
+      if(data && data.errCode === 0){
+        this.product_list=data.data;
+        this.product_list.forEach((element:any) => {
+          if(element.type_pro_sex=="women"){
+            this.product_list_women.push(element);
+          }
+        });
+      }
     })
   }
 

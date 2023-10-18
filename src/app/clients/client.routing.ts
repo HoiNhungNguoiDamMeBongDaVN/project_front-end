@@ -9,9 +9,8 @@ import { OrderComponent } from './order/order.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductMenComponent } from './product-men/product-men.component';
 import { ProductWomenComponent } from './product-women/product-women.component';
-import { ProductDetailMenComponent } from './product-detail-men/product-detail-men.component';
 import { ProductKidComponent } from './product-kid/product-kid.component';
-import { ProductKidDetailComponent } from './product-kid-detail/product-kid-detail.component';
+import { ProductSearchComponent } from './product-search/product-search.component';
 
 const routes: Routes = [
     {
@@ -64,16 +63,12 @@ const routes: Routes = [
                 component:ProductDetailComponent
             },
             {
-                path:"product_detail_men/:ID",
-                component:ProductDetailMenComponent
-            },
-            {
-                path:"product_kid/:ID",
-                component:ProductKidDetailComponent
-            },
-            {
                 path:"cart/:ID",
                 component:CartComponent
+            },
+            {
+                path:"product_search",
+                component:ProductSearchComponent
             }
         ]
     }

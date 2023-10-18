@@ -13,9 +13,8 @@ import { SortDirective } from 'src/app/directives/sort-data.directive';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductKidComponent } from '../product-kid/product-kid.component';
-import { ProductDetailMenComponent } from '../product-detail-men/product-detail-men.component';
 import {RouterModule} from '@angular/router';
-import { ProductKidDetailComponent } from '../product-kid-detail/product-kid-detail.component';
+import { ProductSearchComponent } from '../product-search/product-search.component';
 
 
 @NgModule({
@@ -24,13 +23,12 @@ import { ProductKidDetailComponent } from '../product-kid-detail/product-kid-det
     ProductDetailComponent,
     IndexsComponent,
     MyinformationComponent,
-    ProductDetailMenComponent,
     ProductDetailComponent,
     LayoutclientComponent,
     ProductWomenComponent,
     ProductMenComponent,
     ProductKidComponent,
-    ProductKidDetailComponent,
+    ProductSearchComponent,
     OrderComponent,
     SortDirective,
   ],

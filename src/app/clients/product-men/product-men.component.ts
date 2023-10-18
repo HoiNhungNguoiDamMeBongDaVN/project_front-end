@@ -9,7 +9,7 @@ import { ApiProductsService } from 'src/app/services/api_products/api-product.se
 })
 export class ProductMenComponent implements OnInit {
 
-  constructor(private httpClient:ApiProductsService) { }
+  constructor(private productService:ApiProductsService) { }
 
 
 
@@ -18,6 +18,11 @@ export class ProductMenComponent implements OnInit {
 
   product_list:[]|any;
   product_list_men: any[] = [];
+  listGetSize : any []=[];
+  listGetColor : any []=[];
+  listColor: any[] = [];
+  listSize: any[] = [];
+
   @Input() childMessage:string | undefined;
 
   public searchName = new Subject<string>();
@@ -26,20 +31,75 @@ export class ProductMenComponent implements OnInit {
   public fillterName = '';
 
   ngOnInit(): void {
-    this.getData();
+    this.getProductMent();
+    this.getAllSize();
+    this.getAllColor();
   } 
 
-  getData(){ 
-    this.httpClient.getAllProduct().subscribe(data =>{
-      this.product_list=data;
-      this.product_list.forEach((element:any) => {
-        if(element.set=="men"){
-          this.product_list_men.push(element);
-        }
-      });
+  getAllColor() {
+    this.productService.getAllColor().subscribe(data => {
+      if (data && data.errCode === 0) {
+        this.listColor = data.data;
+      }
     })
   }
 
+  getAllSize() {
+    this.productService.getAllSize().subscribe(data => {
+      if (data && data.errCode === 0) {
+        this.listSize = data.data;
+      }
+    })
+  }
+
+  getProductMent(){ 
+    this.productService.getAllProduct().subscribe(data =>{
+      if(data && data.errCode === 0){
+        this.product_list=data.data;
+        this.product_list.forEach((element:any) => {
+          if(element.type_pro_sex=="men"){
+            this.product_list_men.push(element);
+          }
+        });
+      }
+    })
+  }
+
+  getSizeValue(size: any) {
+    this.listGetSize.push(size.name_s);
+  }
+
+  getColorValue(color: any) {
+    this.listGetColor.push(color);
+  }
+  
+
+  filterProduct() {
+    let data = {};
+    if (this.listGetSize.length > 0 || this.listGetColor.length > 0) {
+      data = {
+        size: this.listGetSize,
+        color: this.listGetColor,
+        type_sex: "men"
+      };
+      this.productService.filterProduct({ data: data }).subscribe(data => {
+        if (data && data.errCode === 0) {
+          this.product_list_men = data.data;
+        }
+      })
+    }
+  }
+
+
+  cancelFilterProduct() {
+    if (this.listGetSize.length > 0 || this.listGetColor.length > 0) {
+      this.product_list_men = [];
+      this.getProductMent();
+      this.listGetSize = [];
+      this.listGetColor = [];
+
+    }
+  }
   loadRouter(){
     location.replace("/clients/cart");
   }

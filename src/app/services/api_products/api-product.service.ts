@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
-import {PRODUCTS} from "../enpoint"
+import {
+  GET_ALL_PRODUCT, GET_ALL_COLOR, GET_ALL_SIZE, CREATE_PRODUCT, GET_DETAIL_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT,FILTER_PRODUCT
+} from "../enpoint"
 import { Observable, catchError, throwError } from 'rxjs';
 import { product } from '../../models/product.model';
 
@@ -10,75 +12,132 @@ import { product } from '../../models/product.model';
 })
 export class ApiProductsService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getAllProduct():Observable<any>{
+  getAllColor(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     });
-    return this.httpClient.get<any>(`${environment.api}/${PRODUCTS}`,{headers:headers}).pipe(
-      catchError((err)=>{
+    return this.httpClient.get<any>(`${environment.api}/${GET_ALL_COLOR}`, { headers: headers }).pipe(
+      catchError((err) => {
         return throwError(err);
       })
     )
   }
 
-  addProduct(data:product):Observable<any>{
+  getAllSize(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     });
-    return this.httpClient.post(`${environment.api}/${PRODUCTS}`,data, { headers: headers }).pipe(
-      catchError((err)=>{
+    return this.httpClient.get<any>(`${environment.api}/${GET_ALL_SIZE}`, { headers: headers }).pipe(
+      catchError((err) => {
         return throwError(err);
       })
     )
   }
 
-  getProductDetail(id:string):Observable<any>{
+  getAllProduct(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     });
-    return this.httpClient.get(`${environment.api}/${PRODUCTS}/${id}`,{headers:headers}).pipe(
-      catchError((err)=>{
+    return this.httpClient.get<any>(`${environment.api}/${GET_ALL_PRODUCT}`, { headers: headers }).pipe(
+      catchError((err) => {
         return throwError(err);
       })
     )
   }
 
-  deleteProduct(id:string):Observable<any>{
+  addProduct(data: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     });
-    return this.httpClient.delete(`${environment.api}/${PRODUCTS}/${id}`,{headers:headers}).pipe(
-      catchError((err)=>{
+    return this.httpClient.post(`${environment.api}/${CREATE_PRODUCT}`, data, { headers: headers }).pipe(
+      catchError((err) => {
         return throwError(err);
       })
     )
   }
 
-  editProduct(id:string,data:product):Observable<any>{
+  getProductDetail(id: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     });
-    return this.httpClient.put(`${environment.api}/${PRODUCTS}/${id}`,data,{headers:headers}).pipe(
-      catchError((err)=>{
+    return this.httpClient.get(`${environment.api}/${GET_DETAIL_PRODUCT}?id=${id}`, { headers: headers }).pipe(
+      catchError((err) => {
         return throwError(err);
       })
     )
   }
+
+  deleteProduct(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+    });
+    return this.httpClient.delete(`${environment.api}${DELETE_PRODUCT}?id=${id}`, { headers: headers }).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    )
+  }
+
+  editProduct(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+    });
+    return this.httpClient.put(`${environment.api}${EDIT_PRODUCT}`, data, { headers: headers }).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    )
+  }
+
+  searchProduct(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+    });
+    return this.httpClient.post(`${environment.api}${SEARCH_PRODUCT}`, data, { headers: headers }).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    )
+  }
+
+  filterProduct(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+    });
+    return this.httpClient.post(`${environment.api}${FILTER_PRODUCT}`, data, { headers: headers }).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    )
+  }
+
 }

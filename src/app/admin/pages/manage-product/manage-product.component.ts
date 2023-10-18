@@ -24,14 +24,17 @@ export class ManageProductComponent implements OnInit {
 
   loadProductAPI(){
     this.productAPI.getAllProduct().subscribe(data=>{
-      this.arrayProductAPI=data;
+      if(data && data.errCode===0){
+        this.arrayProductAPI=data.data;
+      }
+      
     })
   }
 
   deleteProductItemAPI(id:string){
     ToastDeleteConfirm(MESS_DELETE_CONFIRM("sản phẩm")).then((res:any)=>{
       this.productAPI.deleteProduct(id).subscribe(data=>{
-        if(data.value){
+        if(data){
           this.handleSuccess(DELETE.delete_success,2000);
           this.loadProductAPI();
         }

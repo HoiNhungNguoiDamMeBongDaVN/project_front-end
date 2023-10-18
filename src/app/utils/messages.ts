@@ -19,6 +19,16 @@ export const VALIDATE_FORM_PRODUCT={
     amount:"Bạn cần nhập số lượng sản phẩm",
     sale:"Bạn cần nhập sale sản phẩm"
 }
+export const VALIDATOR_ADD_PRODUCT = {
+    name_pro: 'Vui lòng nhập tên sản phẩm',
+    type_sex: 'Vui lòng chọn giới tính sản phẩm!',
+    image_pro: 'Vui lòng chọn ảnh',
+    price: 'Vui lòng nhập giá',
+    sale: 'Vui lòng nhập mức sale',
+    quantity: 'Vui lòng nhập số lượng ',
+    size: 'Vui lòng chọn size',
+    color: 'Vui lòng chọn màu cho sản phẩm',
+  };
 
 export const VALIDATE_FORM_ACCOUNT={
     name:"Bạn cần nhập tên tài khoản",

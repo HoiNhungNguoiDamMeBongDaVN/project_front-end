@@ -10,8 +10,9 @@ import { ChartsAdminComponent } from '../pages/charts-admin/charts-admin.compone
 import { RegisterComponentAccount } from "../pages/register/register.component";
 import { AdminRoutingModule } from '../admin.routing';
 import { FormsModule } from '@angular/forms';
-
-
+import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { ChartModule } from 'angular-highcharts';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,16 @@ import { FormsModule } from '@angular/forms';
     ChatsCustomerComponent,
     LayoutAdminComponent,
     ChartsAdminComponent,
-    RegisterComponentAccount
+    RegisterComponentAccount,
+    DashboardComponent,
+
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FormsModule
+    FormsModule,
+    ChartModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

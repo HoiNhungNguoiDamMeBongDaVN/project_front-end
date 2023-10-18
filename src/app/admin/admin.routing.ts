@@ -9,17 +9,22 @@ import { EditProductComponent } from './pages/edit-product/edit-product.componen
 import { LayoutAdminComponent } from './pages/layout-admin/layout-admin.component';
 import { ManageProductComponent } from './pages/manage-product/manage-product.component';
 import { OrderCustomerComponent } from './pages/order-customer/order-customer.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
         path:"admins",
         component:LayoutAdminComponent,
-        canActivateChild:[GuardLoginAdminGuard],
+        // canActivateChild:[GuardLoginAdminGuard],
         children:[
             {
                 path:"",
-                redirectTo:"manage_product",
+                redirectTo:"dashboard",
                 pathMatch:"full" 
+            },
+            {
+                path:"dashboard",
+                component:DashboardComponent,
             },
             {
                 path:"manage_product",

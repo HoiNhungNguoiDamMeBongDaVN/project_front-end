@@ -14,11 +14,9 @@
                             </div>
                             <div class="collapse" id="size">
                                 <div class="list_size">
-                                    <button class="size_but">S</button>
-                                    <button class="size_but">M</button>
-                                    <button class="size_but">L</button>
-                                    <button class="size_but">XL</button>
-                                    <button class="size_but">XLL</button>
+                                    <button class="size_but" (click)="getSizeValue(item)"
+                                        [class.checked]="item.isChecked"
+                                        *ngFor="let item of listSize">{{item.name_s}}</button>
                                 </div>
                             </div>
                         </li>
@@ -30,14 +28,11 @@
                             </div>
                             <div class="collapse" id="color">
                                 <div class="list_color">
-                                    <span class="color_but" style="background-color: #631a82;"></span>
-                                    <span class="color_but" style="background-color: #2300e9;"></span>
-                                    <span class="color_but" style="background-color: #e90008;"></span>
-                                    <span class="color_but" style="background-color: #e0e24c;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
+                                    <div *ngFor="let item of listColor">
+                                        <span class="color_but" (click)="getColorValue(item)"
+                                            [class.checked]="item.isChecked"
+                                            [style.background-color]="item.code_color"></span>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -70,7 +65,7 @@
                 </div>
                 <div class="button_filter">
                     <button class="btns">Bỏ lọc</button>
-                    <button class="btns">Lọc</button>
+                    <button class="btns" (click)="filterAndSearchProduct()">Lọc</button>
                 </div>
             </div>
         </div>
@@ -82,13 +77,14 @@
             <ng-template #noDataTemplate>
                 <h2>KẾT QUẢ TÌM KIẾM THEO "{{sendSearch}}"</h2>
                 <div class="produc_all row" *ngIf="listProductSearch.length && listProductSearch.length > 0">
-                    <div class="boxs col-lg-3" *ngFor="let x of listProductSearch | paginate:{itemsPerPage:4, currentPage:p}">
+                    <div class="boxs col-lg-3"
+                        *ngFor="let x of listProductSearch | paginate:{itemsPerPage:4, currentPage:p}">
                         <div class="image">
 
                             <p class="sale" *ngIf="x.sale>1">-{{x.sale}}%</p>
                             <img src="{{x.image_pro}}" alt="">
                         </div>
-                        <div class="title_detal">
+                        <div class="name_pro">
                             <span><a [routerLink]="[ '/clients/product_detail',x.idpro]"
                                     routerLinkActive="active">{{x.name_pro}}</a></span>
                         </div>
@@ -107,7 +103,8 @@
                     </div>
                 </div>
                 <div class="paginate_product">
-                    <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
+                    <pagination-controls (pageChange)="pageChangeEvent($event)"
+                        *ngIf="listProductSearch.length>4"></pagination-controls>
                 </div>
             </ng-template>
         </div>

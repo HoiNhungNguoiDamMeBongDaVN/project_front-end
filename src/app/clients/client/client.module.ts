@@ -13,10 +13,11 @@ import { SortDirective } from 'src/app/directives/sort-data.directive';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductKidComponent } from '../product-kid/product-kid.component';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProductSearchComponent } from '../product-search/product-search.component';
-
-
+import { LoginCustomerComponent } from '../login-customer/login-customer.component';
+import { RegisterCustomerComponent } from '../register-customer/register-customer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     CartComponent,
@@ -31,14 +32,17 @@ import { ProductSearchComponent } from '../product-search/product-search.compone
     ProductSearchComponent,
     OrderComponent,
     SortDirective,
+    LoginCustomerComponent,
+    RegisterCustomerComponent
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
     FormsModule,
     NgxPaginationModule,
-    RouterModule
-   
+    RouterModule,
+    ReactiveFormsModule
+
   ]
 })
 export class ClientModule { }

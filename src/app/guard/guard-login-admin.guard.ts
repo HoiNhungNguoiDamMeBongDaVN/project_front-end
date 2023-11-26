@@ -13,7 +13,7 @@ export class GuardLoginAdminGuard implements CanActivateChild {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-     if(this.checkAccount.checkAccountAdminGuard()){
+     if(this.checkAccount.checkTokenExpiration()){
        return true;
      }
      else{

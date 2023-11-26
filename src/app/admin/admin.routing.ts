@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GuardLoginAdminGuard } from '../guard_routing/guard-login-admin.guard';
+import { GuardLoginAdminGuard } from '../guard/guard-login-admin.guard';
 import { RegisterComponentAccount } from "./pages/register/register.component";
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { ChartsAdminComponent } from './pages/charts-admin/charts-admin.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
     {
         path:"admins",
         component:LayoutAdminComponent,
-        // canActivateChild:[GuardLoginAdminGuard],
+        canActivateChild:[GuardLoginAdminGuard],
         children:[
             {
                 path:"",

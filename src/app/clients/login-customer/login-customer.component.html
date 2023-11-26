@@ -1,0 +1,41 @@
+<div class="login_customer gird">
+    <div class="auth">
+        <div class="had_account">
+            <p class="title">Bạn đã có tài khoản IVY</p>
+            <p class="description">
+                Nếu bạn đã có tài khoản, hãy đăng nhập để tích lũy điểm
+                thành viên và nhận được những ưu đãi tốt hơn!
+            </p>
+            <div class="had_acount_content">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="option_account">
+                        <div class="forgot_pass">
+                            <p>Quên mật khẩu?</p>
+                        </div>
+                        <div></div>
+                    </div>
+
+                    <button type="button" class="btnf">Đăng nhập</button>
+                </form>
+            </div>
+        </div>
+        <div class="resgister">
+            <p class="title">Bạn đã có tài khoản IVY</p>
+            <p class="description">
+                Nếu bạn chưa có tài khoản trên ivymoda.com, hãy sử dụng tùy chọn này để truy cập biểu mẫu đăng ký.
+            </p>
+            <p class="description">
+                Bằng cách cung cấp cho IVY moda thông tin chi tiết của bạn, quá trình mua hàng trên ivymoda.com sẽ là
+                một trải nghiệm thú vị và nhanh chóng hơn!
+            </p>
+            <button type="button" class="btnf" [routerLink]="[ '/clients/register_customer' ]" routerLinkActive="active" >Đăng ký</button>
+        </div>
+    </div>
+</div>

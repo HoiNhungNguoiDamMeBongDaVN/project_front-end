@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import {
-  GET_ALL_PRODUCT, GET_ALL_COLOR, GET_ALL_SIZE, CREATE_PRODUCT, GET_DETAIL_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT,FILTER_PRODUCT
+  GET_ALL_PRODUCT, GET_ALL_COLOR, GET_ALL_SIZE, CREATE_PRODUCT, GET_DETAIL_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT, FILTER_PRODUCT, FILTER_AND_SEARCH_PRODUCT
 } from "../enpoint"
 import { Observable, catchError, throwError } from 'rxjs';
 import { product } from '../../models/product.model';
@@ -10,8 +10,8 @@ import { product } from '../../models/product.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiProductsService {
 
+export class ApiProductsService {
   constructor(private httpClient: HttpClient) { }
 
   getAllColor(): Observable<any> {
@@ -134,6 +134,20 @@ export class ApiProductsService {
       'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
     });
     return this.httpClient.post(`${environment.api}${FILTER_PRODUCT}`, data, { headers: headers }).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    )
+  }
+
+  filterAndSearchProduct(data: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+    });
+    return this.httpClient.post(`${environment.api}${FILTER_AND_SEARCH_PRODUCT}`, data, { headers: headers }).pipe(
       catchError((err) => {
         return throwError(err);
       })

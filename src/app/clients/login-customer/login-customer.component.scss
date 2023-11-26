@@ -1,0 +1,74 @@
+.login_customer {
+    margin-top: 100px;
+    max-width: 1170px;
+    margin-bottom: 40px;
+
+    .auth {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+
+        ::before {
+            position: absolute;
+            content: "";
+            height: 300px;
+            width: 1px;
+            left: 50%;
+            top: 0;
+            background-color: #e7e8e9;
+        }
+
+        .had_account {
+            flex: 0 0 480px;
+            width: 100%;
+
+            .title {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .description {
+                text-align: center;
+                color: #585858;
+            }
+
+            .had_acount_content {
+                max-width: 390px;
+                margin: 0 auto;
+                margin-top: 30px;
+
+                input {
+                    padding: 10px;
+                }
+
+                .option_account {
+                    display: flex;
+
+                    p {
+                        font-size: 15px;
+                        cursor: pointer;
+                        text-decoration: underline;
+                        color: rgb(62, 62, 62);
+                    }
+
+                }
+            }
+        }
+
+        .resgister {
+            width: 100%;
+            flex: 0 0 480px;
+
+            .title {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .description {
+                text-align: center;
+                color: #585858;
+            }
+        }
+    }
+}

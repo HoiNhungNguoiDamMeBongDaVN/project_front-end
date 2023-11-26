@@ -5,6 +5,7 @@ import { ApiProductsService } from 'src/app/services/api_products/api-product.se
 import { VALIDATOR_ADD_PRODUCT } from "../../../utils/messages";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiCloudImageService } from 'src/app/services/api_image_cloud/api-cloud-image.service';
+import { MESS_CREATE_CONFIRM, ToastError, ToastSuccess } from 'src/app/utils/alert';
 
 @Component({
   selector: 'app-add-product',
@@ -14,16 +15,19 @@ import { ApiCloudImageService } from 'src/app/services/api_image_cloud/api-cloud
 export class AddProductComponent implements OnInit {
   editorForm: any;
   form: FormGroup;
+  submit = false;
+  checked = false;
+
   constructor(private apiProduct: ApiProductsService, private router: Router, private fb: FormBuilder, private apiCloudImage: ApiCloudImageService) {
     this.form = this.fb.group({
       name_pro: ['', Validators.compose([Validators.required])],
       type_sex: ['', Validators.compose([Validators.required])],
-      image: [''],
+      image: ['', Validators.compose([Validators.required])],
       price: ['', Validators.compose([Validators.required])],
       sale: ['', Validators.compose([Validators.required])],
       quantity: ['', Validators.compose([Validators.required])],
       des: ['', Validators.compose([Validators.required])],
-      status: ['']
+      status: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -34,6 +38,10 @@ export class AddProductComponent implements OnInit {
   selectedOption: any;
   listGetColor: any[] = [];
   listGetSize: any[] = [];
+
+  errorValidateSize: string | any;
+  errorValidateColor: string | any
+  errorValidateTypeProduct: string | any;
 
   listColor: [] | any;
   listSize: [] | any;
@@ -77,11 +85,33 @@ export class AddProductComponent implements OnInit {
   }
 
   getSizeValue(size: any) {
-    this.listGetSize.push(size.name_s);
+    size.isChecked = !size.isChecked;
+    if (size.isChecked) {
+      this.listGetSize.push(size.name_s);
+    } else {
+      const index = this.listGetSize.indexOf(size.name_s);
+      if (index !== -1) {
+        this.listGetSize.splice(index, 1);
+      }
+    }
   }
 
   getColorValue(color: any) {
-    this.listGetColor.push(color);
+    color.isChecked = !color.isChecked;
+    if (color.isChecked) {
+      let convertColor = {
+        name_c: color.name_c,
+        idcolor: color.idcolor,
+        isChecked: false,
+        code_color: color.code_color
+      }
+      this.listGetColor.push(convertColor);
+    } else {
+      const index = this.listGetColor.indexOf(color);
+      if (index !== -1) {
+        this.listGetColor.splice(index, 1);
+      }
+    }
   }
 
   handleImage(event: any) {
@@ -94,31 +124,67 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct_API(form: FormGroup) {
+    this.submit = true;
+    let name_pro = form.value.name_pro;
+    let type_pro_sex = form.value.type_sex;
+    let image_pro = form.value.image;
+    let price = form.value.price;
+    let sale = form.value.sale;
+    let quantity = form.value.quantity;
+    let desprohtml = form.value.des;
+    let status_pro = form.value.status;
+    let color = this.listGetColor;
+    let size = this.listGetSize;
 
-    this.apiCloudImage.pushImageCloud({ data: this.converImage }).subscribe(image => {
-      if (image && image.errCode === 0) {
-        this.data = {
-          name_pro: form.value.name_pro,
-          type_pro_sex: form.value.type_sex,
-          image_pro: image.data.url,
-          price: form.value.price,
-          sale: form.value.sale,
-          quantity: form.value.quantity,
-          desprohtml: form.value.des,
-          status_pro: form.value.status,
-          color: JSON.stringify(this.listGetColor),
-          size: JSON.stringify(this.listGetSize)
-        }
-        this.apiProduct.addProduct({ data: this.data }).subscribe(res => {
-          if (res) {
+    if (color.length <= 0 || size.length <= 0 || !type_pro_sex || !name_pro || !image_pro || !price || !sale || !quantity || !desprohtml || !status_pro || !color || !size) {
+      console.log("ma");
 
-            this.router.navigateByUrl('admins/manage_product');
+      this.errorValidateColor = VALIDATOR_ADD_PRODUCT.color;
+      this.errorValidateTypeProduct = VALIDATOR_ADD_PRODUCT.type_sex;
+      this.errorValidateColor = VALIDATOR_ADD_PRODUCT.size;
+    }
+    else {
+
+      this.apiCloudImage.pushImageCloud({ data: this.converImage }).subscribe(image => {
+        if (image && image.errCode === 0) {
+          this.data = {
+            name_pro: name_pro,
+            type_pro_sex: type_pro_sex,
+            image_pro: image.data.url,
+            price: price,
+            sale: sale,
+            quantity: quantity,
+            desprohtml: desprohtml,
+            status_pro: status_pro,
+            color: JSON.stringify(color),
+            size: JSON.stringify(size)
           }
-        })
-      }
-      this.form.reset();
-    })
+          this.apiProduct.addProduct({ data: this.data }).subscribe(res => {
+            if (res) {
+              console.log(res);
 
+              this.handleSuccess(MESS_CREATE_CONFIRM('sản phẩm thành công!'), 1000);
+              this.router.navigateByUrl('/admins/manage_product');
+            }
+            else {
+              this.handleErorr(MESS_CREATE_CONFIRM('sản phẩm thất bại!'), 1000);
+            }
+          })
+        }
+        else {
+          this.handleErorr(MESS_CREATE_CONFIRM('sản phẩm thất bại!'), 1000);
+        }
+      })
+    }
+
+  }
+
+  handleSuccess(text: string, timeout: number) {
+    ToastSuccess(text, timeout);
+  }
+
+  handleErorr(text: string, timeout: number) {
+    ToastError(text, timeout)
   }
 
   andleStyleError(name: any) {

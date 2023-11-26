@@ -18,6 +18,7 @@
                             <div class="collapse" id="size">
                                 <div class="list_size">
                                     <button class="size_but" (click)="getSizeValue(item)"
+                                        [class.checked]="item.isChecked"
                                         *ngFor="let item of listSize">{{item.name_s}}</button>
                                 </div>
                             </div>
@@ -31,7 +32,8 @@
                             <div class="collapse" id="color">
                                 <div class="list_color">
                                     <div *ngFor="let item of listColor">
-                                        <span class="color_but" (click)="getColorValue(item.code_color)"
+                                        <span class="color_but" (click)="getColorValue(item)"
+                                            [class.checked]="item.isChecked"
                                             [style.background-color]="item.code_color"></span>
                                     </div>
                                 </div>
@@ -71,17 +73,18 @@
             </div>
         </div>
         <div class="category_right col-lg-9">
-            <div class="title_detal">
-                <span>Hàng trẻ em</span>
+            <div class="title_detail">
+                <span>Quần áo trẻ em</span>
             </div>
             <div class="produc_all row" *ngIf="product_list_kid.length>0">
 
-                <div class="boxs col-lg-3" *ngFor="let x of product_list_kid | paginate:{itemsPerPage:4, currentPage:p}">
+                <div class="boxs col-lg-3"
+                    *ngFor="let x of product_list_kid | paginate:{itemsPerPage:4, currentPage:p}">
                     <div class="image">
                         <p class="sale" *ngIf="x.sale>1">-{{x.sale}}%</p>
                         <img src="{{x.image_pro}}" alt="">
                     </div>
-                    <div class="title_detal">
+                    <div class="name_pro">
                         <span><a [routerLink]="[ '/clients/product_detail',x.idpro]"
                                 routerLinkActive="active">{{x.name_pro}}</a></span>
                     </div>
@@ -102,18 +105,18 @@
             <div class="produc_all" *ngIf="product_list_kid.length<=0">
                 <p style="font-size: 25px; color: #7f7f7f;">Không tìm thấy sản phẩm phù hợp !</p>
             </div>
-            <div class="paginate_product" *ngIf="product_list_kid.length>0">
+            <div class="paginate_product" *ngIf="product_list_kid.length>5">
                 <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
             </div>
         </div>
     </div>
-    <div class="detal_infor">
-        <!-- <span>
+    <!-- <div class="detal_infor">
+        <span>
             <B> Chân váy </B>là một trong những trang phục quen thuộc đối với mỗi cô gái và là món “bảo bối” không thể
             thiếu trong tủ đồ của mỗi chị em. Chỉ cần biết cách phối đồ chút là bạn đã có một outfit thật tuyệt chào đón
             ngày mới. Hãy để Thời Trang IVY moda giới thiệu tới các bạn top những chân váy, mẫu chân váy dài, chân váy
             ngắn, chân váy chữ A, chân váy dài, các kiểu chân váy đẹp nhất hiện nay chỉ có tại IVY moda nhé.
-        </span> -->
-    </div>
+        </span>
+    </div> -->
 </section>
 <!-- ends category -->

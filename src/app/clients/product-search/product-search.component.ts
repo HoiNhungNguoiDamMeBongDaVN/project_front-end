@@ -10,19 +10,23 @@ import { SearchProductService } from 'src/app/services/search_product/search-pro
 export class ProductSearchComponent {
   sendSearch: string | any;
   listProductSearch: any[] = [];
-  p:number=0;
-  i:number=5;
-
-
+  p: number = 0;
+  i: number = 5;
+  listGetSize: any[] = [];
+  listGetColor: any[] = [];
+  listColor: any[] = [];
+  listSize: any[] = [];
+  checked = false;
   constructor(private searchProduct: SearchProductService, private productService: ApiProductsService) {
-    this.searchProduct.data$.subscribe(data => {
+    this.searchProduct.data$.subscribe((data: any) => {
       this.sendSearch = data;
       this.getProductSearch();
     })
   }
 
   ngOnInit(): void {
-    // this.getProductSearch();
+    this.getAllSize();
+    this.getAllColor();
   }
 
   getProductSearch() {
@@ -39,8 +43,64 @@ export class ProductSearchComponent {
     }
   }
 
-  pageChangeEvent(event:number){
-    this.p=event;
+  getAllColor() {
+    this.productService.getAllColor().subscribe((data:any) => {
+      if (data && data.errCode === 0) {
+        this.listColor = data.data;
+      }
+    })
+  }
+
+  getAllSize() {
+    this.productService.getAllSize().subscribe((data:any) => {
+      if (data && data.errCode === 0) {
+        this.listSize = data.data;
+      }
+    })
+  }
+
+  getSizeValue(size: any) {
+    size.isChecked = !size.isChecked;
+    if (size.isChecked) {
+      this.listGetSize.push(size.name_s);
+    } else {
+      const index = this.listGetSize.indexOf(size.name_s);
+      if (index !== -1) {
+        this.listGetSize.splice(index, 1);
+      }
+    }
+  }
+
+  getColorValue(color: any) {
+    color.isChecked = !color.isChecked;
+    if (color.isChecked) {
+      this.listGetColor.push(color.code_color);
+    } else {
+      const index = this.listGetColor.indexOf(color.code_color);
+      if (index !== -1) {
+        this.listGetColor.splice(index, 1);
+      }
+    }
+  }
+
+  filterAndSearchProduct() {
+    let data = {};
+    if (this.listGetSize.length > 0 || this.listGetColor.length > 0) {
+      data = {
+        size: this.listGetSize,
+        color: this.listGetColor,
+        titleSearch: this.sendSearch
+      };
+      this.productService.filterAndSearchProduct({ data: data }).subscribe((data:any) => {
+        if (data && data.errCode === 0) {
+          this.listProductSearch = data.data;
+        }
+      })
+    }
+  }
+
+  pageChangeEvent(event: number) {
+    this.p = event;
   }
 
 }

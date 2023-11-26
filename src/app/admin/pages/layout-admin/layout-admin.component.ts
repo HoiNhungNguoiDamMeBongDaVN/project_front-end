@@ -23,12 +23,12 @@ export class LayoutAdminComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SidenavToggle> = new EventEmitter();
   screenWith = 0;
   logoutAccount() {
-    sessionStorage.removeItem("curentAccount");
+    sessionStorage.removeItem("curentAccountManager");
     location.reload();
   }
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({collapsed:this.collapsed, screenWith:this.screenWith});
+    this.onToggleSideNav.emit({ collapsed: this.collapsed, screenWith: this.screenWith });
   }
   closeSidenav(): void {
     this.collapsed = false;

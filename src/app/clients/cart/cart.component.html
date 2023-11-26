@@ -1,99 +1,113 @@
-
 <!-- starts cart -->
 <section class="gird product_cart">
-    <div class="full-product_cart" *ngIf="this.checkout.carts.length>0">
-        <div class="product_cart-left">
-            <div class="title_cart">
-                <p>Giỏ hàng của bạn</p>
-            </div>
-            <div class="table_show_product">
-                <table>
-                    <tr class="title_table">
-                        <th>Ảnh sản phẩm</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Sale</th>
-                        <th>Mức giá</th>
-                        <th>Số lượng</th>
-                        <th>Tổng tiền</th>
-                        <th>Xóa</th>
-                    </tr>
-                    <tr class="detail_table" *ngFor="let x of checkout.carts;let n=index">
-                        <td class="image">
-                            <img src="{{x.image}}" alt="">
-                        </td>
-                        <td class="name">
-                            <span>
-                                {{x.name}}
-                            </span>
-                        </td>
-                        <td class="sale">
-                            <span *ngIf="x.sale>0">(-{{x.sale}}%)</span>
-                        </td>
-                        <td class="price">
-                            <span>{{x.price}}<sub>đ</sub></span>
-                        </td>
-                        <td class="price">
-                           <span>
-                            {{x.amount}}
-                           </span>
-                        </td>
-                        <td class="total">
-                            <span >
-                                {{(x.amount*x.price)*((100-x.sale)/100)}} <sub>đ</sub>
-                            </span>
-                        </td>
-                        
-                        <td><button type="button" class="button_remove" (click)="deleteItem(n,x)"><i class="fa-solid fa-trash-can" ></i></button></td>
-                    </tr>
-                    
-                </table>
-                
-            </div>
-            <button  class="btns" [routerLink]="[ '/clients/product_women' ]" routerLinkActive="active"><i class="fa-solid fa-arrow-left-long"></i> Tiếp tục mua hàng</button>
-        </div>
-        <div class="product_cart-right">
-            <div class="payment">
-                <div class="title">Tổng tiền giỏ hàng</div>
-                
-               
-                <div class="cart_summary">
-                    <td>Tổng sản phẩm:</td>
-                    <span ><input type="number" name="" id="" readonly  [value]="checkout.totalAmount"><sub>cái</sub></span>
+    <div class="full-product_cart row" *ngIf="(cart$ | async) as cart; else notcart">
+        <ng-container *ngIf="cart?.length; else notcart">
+            <div class="product_cart-left col-lg-8">
+                <div class="title_cart">
+                    <p>Giỏ hàng của bạn</p>
                 </div>
-                <div class="cart_summary">
-                    <td>Tổng tiền hàng:</td>
-                    <span ><input type="number" name="" id="" readonly  [value]="checkout.totalPriceProduct"><sub>VNđ</sub></span>
-                </div>
-                <div class="cart_summary">
-                    <td>Thành tiền:</td>
-                    <span ><input type="number" name="" id="" readonly  [value]="checkout.totalPriceProductSale"><sub>VNđ</sub></span>
-                </div>
-                <div class="cart_summary">
-                    <td>Tạm tính:</td>
-                    <span ><input type="number" name="" id="" readonly  [value]="checkout.totalPriceProductSale"><sub>VNđ</sub></span>
-                </div>
+                <div class="table_show_product">
+                    <table>
+                        <thead class="title_table">
+                            <th>Ảnh sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Sale</th>
+                            <th>Mức giá</th>
+                            <th>Số lượng</th>
+                            <th>Xóa</th>
+                        </thead>
+                        <tbody class="detail_table" *ngFor="let x of cart$|async;let n=index">
+                            <td class="image">
+                                <div >
+                                    <img src="{{x.image_pro}}" alt="">
+                                </div>
+                            </td>
+                            <td class="name">
+                                <span class="name">
+                                    {{x.name_pro}}
+                                </span><br>
+                                <span class="name">
+                                    Màu: {{x.color}}
+                                </span><br>
+                                <span class="name">
+                                    Size: {{x.size}}
+                                </span><br>
+                            </td>
+                            <td [style.color]="red">
+                                <div class="sale" *ngIf="x.sale>0; else elseBlock">(-{{x.sale}}%)</div>
+                                <ng-template class="sale" #elseBlock>(0%)</ng-template>
+                            </td>
+                            <td>
+                                <span class="price">{{x.price}}<sub>đ</sub></span>
+                            </td>
+                            <td>
+                                <span class="price">
+                                    {{x.quantity}}
+                                </span>
+                            </td>
 
-                <div class="cart_note">
-                    <div class="check">
-                        <i class="fa-solid fa-circle-check"></i>
-                    </div>
-                    <div class="title_order">
-                        <span>Đơn hàng của bạn được Miễn phí ship</span>
-                    </div>
+                            <td class="button_remove"><button type="button" (click)="removeCartItem(x)"><i
+                                        class="fa-solid fa-trash-can"></i></button></td>
+
+                        </tbody>
+
+                    </table>
+
                 </div>
-                <div class="order_button">
-                    <button type="button" class="btnr" [routerLink]="[ '/clients/order']" (click)="createOder()" routerLinkActive="active">Đặt hàng</button>
+                <button class="btns" [routerLink]="[ '/clients/product_women' ]" routerLinkActive="active"><i
+                        class="fa-solid fa-arrow-left-long"></i> Tiếp tục mua hàng</button>
+            </div>
+
+            <div class="product_cart-right  col-lg-4">
+                <div class="payment">
+                    <div class="title">Tổng tiền giỏ hàng</div>
+
+
+                    <div class="cart_summary">
+                        <td>Tổng sản phẩm:</td>
+                        <span><input type="number" name="" id="" readonly [value]="totalProduct"><sub>cái</sub></span>
+                    </div>
+                    <div class="cart_summary">
+                        <td>Tổng tiền hàng:</td>
+                        <span><input type="number" name="" id="" readonly [value]="totalPrice"><sub>VNđ</sub></span>
+                    </div>
+                    <div class="cart_summary">
+                        <td>Thành tiền:</td>
+                        <span><input type="number" name="" id="" readonly
+                                [value]="totalIntoMoneyPro"><sub>VNđ</sub></span>
+                    </div>
+                    <div class="cart_summary">
+                        <td>Tạm tính:</td>
+                        <span><input type="number" name="" id="" readonly
+                                [value]="priceProvisional"><sub>VNđ</sub></span>
+                    </div>
+
+                    <div class="cart_note">
+                        <div class="check">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="title_order">
+                            <span>Đơn hàng của bạn được Miễn phí ship</span>
+                        </div>
+                    </div>
+                    <div class="order_button">
+                        <button type="button" class="btnr" [routerLink]="[ '/clients/order']"
+                            routerLinkActive="active">Đặt hàng</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        
+        </ng-container>
+
     </div>
-    <div class="product_noproduct" *ngIf="this.checkout.carts.length<=0"> 
-        <div class="cart_empty">
-            <i class="fas fa-shopping-cart"></i>
+    <ng-template #notcart>
+        <div class="product_noproduct">
+            <div class="cart_empty">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <p class="product_empty">Bạn chưa chọn sản phẩm</p>
+            <p class="cart_back" [routerLink]="[ '/clients/product_women' ]" routerLinkActive="active">
+                << Tiếp tục mua hàng ?</p>
         </div>
-        <p class="product_empty">Bạn chưa chọn sản phẩm</p>
-        <p class="cart_back" [routerLink]="[ '/clients/product_women' ]" routerLinkActive="active"><< Tiếp tục mua hàng ?</p>
-    </div>
+    </ng-template>
 </section>
 <!-- ends cart -->

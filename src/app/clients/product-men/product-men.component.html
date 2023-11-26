@@ -18,7 +18,7 @@
                             </div>
                             <div class="collapse" id="size">
                                 <div class="list_size">
-                                    <button class="size_but" (click)="getSizeValue(item)"
+                                    <button class="size_but" (click)="getSizeValue(item)" [class.checked]="item.isChecked"
                                         *ngFor="let item of listSize">{{item.name_s}}</button>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                             <div class="collapse" id="color">
                                 <div class="list_color">
                                     <div *ngFor="let item of listColor">
-                                        <span class="color_but" (click)="getColorValue(item.code_color)"
+                                        <span class="color_but" (click)="getColorValue(item)" [class.checked]="item.isChecked"
                                             [style.background-color]="item.code_color"></span>
                                     </div>
                                 </div>
@@ -72,8 +72,8 @@
             </div>
         </div>
         <div class="category_right col-lg-9">
-            <div class="title_detal">
-                <span>Đồ nam</span>
+            <div class="title_detail">
+                <span>Quần áo nam</span>
             </div>
             <div class="produc_all row" *ngIf="product_list_men.length>0">
 
@@ -82,7 +82,7 @@
                         <p class="sale" *ngIf="x.sale>1">-{{x.sale}}%</p>
                         <img src="{{x.image_pro}}" alt="">
                     </div>
-                    <div class="title_detal">
+                    <div class="name_pro">
                         <span><a [routerLink]="[ '/clients/product_detail',x.idpro]"
                                 routerLinkActive="active">{{x.name_pro}}</a></span>
                     </div>
@@ -103,7 +103,7 @@
             <div class="produc_all" *ngIf="product_list_men.length<=0">
                 <p style="font-size: 25px; color: #7f7f7f;">Không tìm thấy sản phẩm phù hợp !</p>
             </div>
-            <div class="paginate_product" *ngIf="product_list_men.length>0">
+            <div class="paginate_product" *ngIf="product_list_men.length>5">
                 <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
             </div>
         </div>

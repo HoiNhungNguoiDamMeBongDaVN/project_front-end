@@ -1,0 +1,235 @@
+<div class="register_customer gird">
+  <div class="register">
+    <p class="title_register">
+      đăng ký
+    </p>
+    <form [formGroup]="registerCustomer" (submit)="onSubmit(registerCustomer)" action="" method="post">
+
+      <div class="form_register row">
+        <div class="col-lg-6">
+          <div class="register_overview">
+            <p class="title">Thông tin khách hàng</p>
+            <div class="mb-3 row">
+              <div class="col-lg-6"><label for="exampleInputEmail1" class="form-label">Họ:<span
+                    style="color: red;">*</span></label>
+                <input type="text" class="form-control" formControlName="first_name" [ngClass]="{
+                                    'is-invalid':submit &&
+                                      (registerCustomer.controls['first_name'].hasError('required')),
+                                    'is-valid':
+                                      registerCustomer.controls['first_name'].touched &&
+                                      !registerCustomer.controls['first_name'].hasError('required'),
+                                    'form-control': true
+                                  }" id="exampleInputEmail1" placeholder="Họ...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('first_name')?.invalid || registerCustomer.get('first_name')?.touched  ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['first_name'].hasError('required')">{{
+                      Validate_form_register.first_name }}</span>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="col-lg-6"><label for="exampleInputEmail1" class="form-label">Tên:<span
+                    style="color: red;">*</span></label>
+                <input type="text" class="form-control" formControlName="last_name" [ngClass]="{
+                                    'is-invalid': submit &&
+                                      (registerCustomer.controls['last_name'].hasError('required')),
+                                    'is-valid':
+                                      registerCustomer.controls['last_name'].touched &&
+                                      !registerCustomer.controls['last_name'].hasError('required'),
+                                    'form-control': true
+                                  }" id="exampleInputEmail1" placeholder="Tên...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('last_name')?.invalid || registerCustomer.get('last_name')?.touched || registerCustomer.get('last_name')?.valid ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['last_name'].hasError('required')">{{
+                      Validate_form_register.last_name }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <div class="col-lg-6"><label for="exampleInputEmail1" class="form-label">Email:<span
+                    style="color: red;">*</span></label>
+                <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" [ngClass]="{
+                                    'is-invalid':submit &&
+                                      (registerCustomer.controls['email'].hasError('required'))||(registerCustomer.controls['email'].hasError('email')),
+                                    'is-valid':
+                                      registerCustomer.controls['email'].touched &&
+                                      !registerCustomer.controls['email'].hasError('required'),
+                                    'form-control': true
+                                  }" placeholder="Email...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('email')?.invalid || registerCustomer.get('email')?.touched || registerCustomer.get('email')?.valid ||registerCustomer.get('email')?.hasError('email')">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['email'].hasError('required')">{{
+                      Validate_form_register.email }}</span>
+                  </div>
+                </ng-container>
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('email')?.hasError('email')||registerCustomer.get('email')?.touched">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['email'].hasError('email')">{{
+                      Validate_form_register.email_invalid }}</span>
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="col-lg-6"><label for="exampleInputEmail1" class="form-label">Tên đăng
+                  nhập:<span style="color: red;">*</span></label>
+                <input type="text" formControlName="numberphone" class="form-control" [ngClass]="{
+                                  'is-invalid':submit &&
+                                    (registerCustomer.controls['numberphone'].hasError('required'))||registerCustomer.controls['numberphone'].hasError('maxlength'),
+                                  'is-valid':
+                                    registerCustomer.controls['numberphone'].touched &&
+                                    !registerCustomer.controls['numberphone'].hasError('required'),
+                                  'form-control': true
+                                }" id="exampleInputEmail1" placeholder="Số điện thoại...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('numberphone')?.invalid || registerCustomer.get('numberphone')?.touched || registerCustomer.get('numberphone')?.valid ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['numberphone'].hasError('required')">{{
+                      Validate_form_register.numberphone }}</span>
+                    <span class="style-error" *ngIf="registerCustomer.controls['numberphone'].hasError('maxlength')">{{
+                      Validate_form_register.maxlengthNumberPhone }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <div class="col-lg-6"><label for="exampleInputEmail1" class="form-label">Ngày sinh:<span
+                    style="color: red;">*</span></label>
+                <input type="date" class="form-control" formControlName="date_of_day" [ngClass]="{
+                                    'is-invalid':submit &&
+                                      (registerCustomer.controls['date_of_day'].hasError('required')),
+                                    'is-valid':
+                                      registerCustomer.controls['date_of_day'].touched &&
+                                      !registerCustomer.controls['date_of_day'].hasError('required'),
+                                    'form-control': true
+                                  }" id="exampleInputEmail1" placeholder="Ngày sinh...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('date_of_day')?.invalid || registerCustomer.get('date_of_day')?.touched || registerCustomer.get('date_of_day')?.valid ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['date_of_day'].hasError('required')">{{
+                      Validate_form_register.date_of_day }}</span>
+                  </div>
+                </ng-container>
+              </div>
+              <div class="col-lg-6"><label for="exampleInputEmail1" class="form-label">Giới tính:<span
+                    style="color: red;">*</span></label>
+                <select class="form-select" formControlName="set" aria-label="Default select example" [ngClass]="{
+                                    'is-invalid': submit && registerCustomer.get('set').hasError('required'),
+                                    'is-valid': registerCustomer.get('set').touched && !registerCustomer.get('set').hasError('required'),
+                                    'form-select': true
+                                  }">
+                  <option selected value="women">Nữ</option>
+                  <option value="men">Nam</option>
+                  <option value="other">Khác</option>
+                </select>
+                <ng-container class="invalid-feedback"
+                  *ngIf="submit && registerCustomer.get('set').hasError('required')">
+                  <div class="invalid-feedback">
+                    <span class="style-error">{{Validate_form_register.set }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="mb-3 ">
+              <label for="floatingTextarea">Địa chỉ:<span style="color: red;">*</span></label>
+              <textarea class="form-control" formControlName="address" placeholder="Địa chỉ..." [ngClass]="{
+                                'is-invalid':submit &&
+                                  (registerCustomer.controls['address'].hasError('required')),
+                                'is-valid':
+                                  registerCustomer.controls['address'].touched &&
+                                  !registerCustomer.controls['address'].hasError('required'),
+                                'form-control': true
+                              }" id="floatingTextarea"></textarea>
+              <ng-container class="invalid-feedback"
+                *ngIf="registerCustomer.get('address')?.invalid || registerCustomer.get('address')?.touched || registerCustomer.get('address')?.valid ">
+                <div class="invalid-feedback" style="margin-top: unset">
+                  <span class="style-error" *ngIf="registerCustomer.controls['address'].hasError('required')">{{
+                    Validate_form_register.address }}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="register_overview">
+            <p class="title">Thông tin mật khẩu</p>
+            <div class="mb-3 row">
+              <div class="col-lg-12"><label for="exampleInputEmail1" class="form-label">Tên đăng
+                  nhập:<span style="color: red;">*</span></label>
+                <input type="text" formControlName="name_login" class="form-control" [ngClass]="{
+                                    'is-invalid':submit &&
+                                      (registerCustomer.controls['name_login'].hasError('required'))||registerCustomer.controls['name_login'].hasError('maxlength'),
+                                    'is-valid':
+                                      registerCustomer.controls['name_login'].touched &&
+                                      !registerCustomer.controls['name_login'].hasError('required'),
+                                    'form-control': true
+                                  }" id="exampleInputEmail1" placeholder="Tên đăng nhập...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('name_login')?.invalid || registerCustomer.get('name_login')?.touched || registerCustomer.get('name_login')?.valid ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['name_login'].hasError('required')">{{
+                      Validate_form_register.name_login }}</span>
+                    <span class="style-error" *ngIf="registerCustomer.controls['name_login'].hasError('maxlength')">{{
+                      Validate_form_register.lenght_name_login }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <div class="col-lg-12"><label for="exampleInputEmail1" class="form-label">Mật khẩu:<span
+                    style="color: red;">*</span></label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{
+                                    'is-invalid':submit &&
+                                      (registerCustomer.controls['password'].hasError('required'))||(registerCustomer.controls['password'].hasError('maxlength')||(registerCustomer.controls['password'].hasError('minlength'))),
+                                    'is-valid':
+                                      registerCustomer.controls['password'].touched &&
+                                      !registerCustomer.controls['password'].hasError('required'),
+                                    'form-control': true
+                                  }" id="exampleInputEmail1" placeholder="Mật khẩu...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('password')?.invalid || registerCustomer.get('password')?.touched || registerCustomer.get('password')?.valid ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error" *ngIf="registerCustomer.controls['password'].hasError('required')">{{
+                      Validate_form_register.password }}</span>
+                    <span class="style-error" *ngIf="registerCustomer.controls['password'].hasError('maxlength')">{{
+                      Validate_form_register.length_password }}</span>
+                    <span class="style-error" *ngIf="registerCustomer.controls['password'].hasError('minlength')">{{
+                      Validate_form_register.length_password }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <div class="col-lg-12"><label for="exampleInputEmail1" class="form-label">Nhập lại mật
+                  khẩu:<span style="color: red;">*</span></label>
+                <input type="password" formControlName="again_password" class="form-control" [ngClass]="{
+                                    'is-invalid':submit &&
+                                      (registerCustomer.controls['again_password'].hasError('required')),
+                                    'is-valid':
+                                      registerCustomer.controls['again_password'].touched &&
+                                      !registerCustomer.controls['again_password'].hasError('required'),
+                                    'form-control': true
+                                  }" id="exampleInputEmail1" placeholder="Nhập lại mật khẩu...">
+                <ng-container class="invalid-feedback"
+                  *ngIf="registerCustomer.get('again_password')?.invalid || registerCustomer.get('again_password')?.touched || registerCustomer.get('again_password')?.valid ">
+                  <div class="invalid-feedback" style="margin-top: unset">
+                    <span class="style-error"
+                      *ngIf="registerCustomer.controls['again_password'].hasError('required')">{{
+                      Validate_form_register.again_password }}</span>
+                  </div>
+                </ng-container>
+                <ng-container class="invalid-feedback" *ngIf="password_and_again_password_difference">
+                  <span style="color: #dc3545;">{{Validate_form_register.password_and_again_password_difference}}</span>
+                </ng-container>
+              </div>
+            </div>
+            <button type="submit" class="btnf">Đăng ký</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

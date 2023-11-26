@@ -11,71 +11,81 @@ import { ProductMenComponent } from './product-men/product-men.component';
 import { ProductWomenComponent } from './product-women/product-women.component';
 import { ProductKidComponent } from './product-kid/product-kid.component';
 import { ProductSearchComponent } from './product-search/product-search.component';
+import { LoginCustomerComponent } from './login-customer/login-customer.component';
+import { RegisterCustomerComponent } from './register-customer/register-customer.component';
 
 const routes: Routes = [
     {
-        path:"clients",
-        component:LayoutclientComponent,
-        children:[
+        path: "clients",
+        component: LayoutclientComponent,
+        children: [
             {
-                path:"",
-                redirectTo:"indexs",
-                pathMatch:"full" 
+                path: "",
+                redirectTo: "indexs",
+                pathMatch: "full"
             },
             {
-                path:"indexs",
-                component:IndexsComponent,
+                path: "indexs",
+                component: IndexsComponent,
             },
             {
-                path:"product_women",
-                component:ProductWomenComponent,
+                path: "product_women",
+                component: ProductWomenComponent,
             },
             {
-                path:"product_men",
-                component:ProductMenComponent
+                path: "product_men",
+                component: ProductMenComponent
             },
             {
-                path:"product_kid",
-                component:ProductKidComponent
+                path: "product_kid",
+                component: ProductKidComponent
             },
             {
-                path:"cart",
-                component:CartComponent
+                path: "cart",
+                component: CartComponent
             },
             {
-                path:"order",
-                component:OrderComponent
+                path: "order",
+                component: OrderComponent
             },
             {
-                path:"product_detail",
-                component:ProductDetailComponent
+                path: "product_detail",
+                component: ProductDetailComponent
             },
             {
-                path:"myinformation",
-                component:MyinformationComponent
+                path: "myinformation",
+                component: MyinformationComponent
             },
             {
-                path:"chat",
-                component:ChatComponent
+                path: "chat",
+                component: ChatComponent
             },
             {
-                path:"product_detail/:ID",
-                component:ProductDetailComponent
+                path: "product_detail/:ID",
+                component: ProductDetailComponent
             },
             {
-                path:"cart/:ID",
-                component:CartComponent
+                path: "cart/:ID",
+                component: CartComponent
             },
             {
-                path:"product_search",
-                component:ProductSearchComponent
+                path: "product_search",
+                component: ProductSearchComponent
+            },
+            {
+                path: "login_customer",
+                component: LoginCustomerComponent
+            },
+            {
+                path: "register_customer",
+                component: RegisterCustomerComponent
             }
         ]
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class ClientRoutingModule { }

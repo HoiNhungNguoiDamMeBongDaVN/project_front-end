@@ -16,6 +16,8 @@ export class ProductKidComponent {
   p: number = 0;
   i: number = 5;
 
+  checked = false;
+
   product_list: [] | any;
   product_list_kid: any[] = [];
   listColor: any[] = [];
@@ -36,7 +38,7 @@ export class ProductKidComponent {
   }
 
   getProductKid() {
-    this.productService.getAllProduct().subscribe(data => {
+    this.productService.getAllProduct().subscribe((data:any) => {
       if (data && data.errCode === 0) {
         this.product_list = data.data;
         this.product_list.forEach((element: any) => {
@@ -49,7 +51,7 @@ export class ProductKidComponent {
   }
 
   getAllColor() {
-    this.productService.getAllColor().subscribe(data => {
+    this.productService.getAllColor().subscribe((data:any) => {
       if (data && data.errCode === 0) {
         this.listColor = data.data;
       }
@@ -57,21 +59,37 @@ export class ProductKidComponent {
   }
 
   getAllSize() {
-    this.productService.getAllSize().subscribe(data => {
+    this.productService.getAllSize().subscribe((data:any) => {
       if (data && data.errCode === 0) {
         this.listSize = data.data;
-        console.log(this.product_list_kid);
-        
       }
     })
   }
 
+
   getSizeValue(size: any) {
-    this.listGetSize.push(size.name_s);
+    size.isChecked = !size.isChecked;
+    if (size.isChecked) {
+      this.listGetSize.push(size.name_s);
+    } else {
+      const index = this.listGetSize.indexOf(size.name_s);
+      if (index !== -1) {
+        this.listGetSize.splice(index, 1);
+      }
+    }
   }
 
+  
   getColorValue(color: any) {
-    this.listGetColor.push(color);
+    color.isChecked = !color.isChecked;
+    if (color.isChecked) {
+      this.listGetColor.push(color.code_color);
+    } else {
+      const index = this.listGetColor.indexOf(color.code_color);
+      if (index !== -1) {
+        this.listGetColor.splice(index, 1);
+      }
+    }
   }
 
   filterProduct() {
@@ -82,7 +100,7 @@ export class ProductKidComponent {
         color: this.listGetColor,
         type_sex: "kid"
       };
-      this.productService.filterProduct({ data: data }).subscribe(data => {
+      this.productService.filterProduct({ data: data }).subscribe((data:any) => {
         if (data && data.errCode === 0) {
           this.product_list_kid = data.data;
         }

@@ -11,28 +11,45 @@
             <div class="detail_infor">
                 <div class="bg-detail">
                     <p class="name">{{proDetail.name_pro}}</p>
-                    <div class="infor_pro">
-                        <p class="price">{{proDetail.price}}<sub>đ</sub></p>
-                        <p class="sale" style="color: red;" *ngIf="proDetail.sale>1">Sale {{proDetail.sale}} %<sub></sub>
-                        <p class="sale" style="color: red;">Sale {{proDetail.sale}} %<sub></sub></p>
-                    </div>
-                    <p class="code_pro">SKU: 48B9175</p>
-                    <div class="list_size" >
-                        <button class="size_but" *ngFor="let item of listSize">{{item}}</button>
-                    </div>
-                    <div class="start_check">
-                        <div class="starts">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                    <div class="product-detail__sub-info">
+                        <p class="code_pro">SKU: 48B9175</p>
+                        <div class="start_check">
+                            <div class="starts">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
                         </div>
                     </div>
+                    <div class="infor_pro">
+                        <p class="price">{{proDetail.price}}<sub>đ</sub></p>
+                        <p class="sale" style="color: red;" *ngIf="proDetail.sale>1">Sale <sub>{{proDetail.sale}}
+                                %</sub></p>
+                        <!-- <p class="sale" style="color: red;">Sale {{proDetail.sale}} %<sub></sub></p> -->
+                    </div>
+                    <div class="list_color">
+                        <div *ngFor="let item of listColor">
+                            <span class="color_but" (click)="getColorValue(item)" [class.checkedColor]="item.isChecked"
+                                [style.background-color]="item.code_color"></span>
+                        </div>
+                    </div>
+                    <div class="list_size">
+                        <button class="size_but" (click)="getSizeValue(item)" [class.checked]="item.isChecked"
+                            *ngFor="let item of listSizeConvert">{{item.name_s}}</button>
+                    </div>
+
+                    <div class="choose_quantity">
+                        <span class="title">Số lượng: </span>
+                        <button class="quantity" (click)="decrement()"><i class="fas fa-minus"></i></button>
+                        <span class="show_quantity">{{quantity_change}}</span>
+                        <button class="quantity" (click)="increment()"><i class="fas fa-plus"></i></button>
+                    </div>
                     <div class="button_detail">
-                        <div class="btns" [routerLink]="[ '/clients/cart',proDetail.idpro]" routerLinkActive="active">
+                        <div class="btns add_cart" (click)="addCart(proDetail)" routerLinkActive="active">
                             Mua Hàng</div>
-                        <div class="btns"><i class="fa-solid fa-heart"></i></div>
+                        <div class="button_heart"><i class="fa-solid fa-heart"></i></div>
                     </div>
                     <div class="title_detail">Giới thiệu về sản phẩm</div>
                     <div class="content_detail">

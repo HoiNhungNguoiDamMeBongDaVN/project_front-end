@@ -16,17 +16,17 @@ export const navbarData=[
     },
     {
         routerLink:'order_cutomer',
-        icon:'fa-solid fa-house',
+        icon:'fas fa-box',
         lable:'Order'
     },
     {
         routerLink:'charts_admin',
-        icon:'fa fa-home',
+        icon:'fas fa-chart-bar',
         lable:'Chart'
     },
     {
         routerLink:'register',
-        icon:'fa fa-home',
+        icon:'fas fa-user-plus',
         lable:'Register'
     }
 ];

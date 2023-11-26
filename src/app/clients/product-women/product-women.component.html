@@ -17,11 +17,9 @@
                             </div>
                             <div class="collapse" id="size">
                                 <div class="list_size">
-                                    <button class="size_but">S</button>
-                                    <button class="size_but">M</button>
-                                    <button class="size_but">L</button>
-                                    <button class="size_but">XL</button>
-                                    <button class="size_but">XLL</button>
+                                    <button class="size_but" (click)="getSizeValueFilter(item)"
+                                        [class.checked]="item.isChecked"
+                                        *ngFor="let item of listSize">{{item.name_s}}</button>
                                 </div>
                             </div>
                         </li>
@@ -33,14 +31,11 @@
                             </div>
                             <div class="collapse" id="color">
                                 <div class="list_color">
-                                    <span class="color_but" style="background-color: #631a82;"></span>
-                                    <span class="color_but" style="background-color: #2300e9;"></span>
-                                    <span class="color_but" style="background-color: #e90008;"></span>
-                                    <span class="color_but" style="background-color: #e0e24c;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
-                                    <span class="color_but" style="background-color: #42b43f;"></span>
+                                    <div *ngFor="let item of listColor">
+                                        <span class="color_but" (click)="getColorValueFilter(item)"
+                                            [class.checked]="item.isChecked"
+                                            [style.background-color]="item.code_color"></span>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -72,25 +67,30 @@
                     </ul>
                 </div>
                 <div class="button_filter">
-                    <button class="btns">Bỏ lọc</button>
-                    <button class="btns">Lọc</button>
+                    <button class="btns" (click)="cancelFilterProduct()">Bỏ lọc</button>
+                    <button class="btns" (click)="filterProduct()">Lọc</button>
                 </div>
             </div>
         </div>
         <div class="category_right col-lg-9">
-            <div class="title_detal">
-                <span>Váy nữ</span>
+            <div class="title_detail">
+                <span>Quần áo nữ</span>
             </div>
-            <div class="produc_all row">
+            <div class="produc_all row" *ngIf="product_list_women.length>0">
 
                 <div class="boxs col-lg-3"
-                    *ngFor="let x of product_list_women | paginate:{itemsPerPage:4, currentPage:p}">
+                    *ngFor="let x of product_list_women | paginate:{itemsPerPage:4, currentPage:p} ;let i = index">
                     <div class="image">
-
                         <p class="sale" *ngIf="x.sale>1">-{{x.sale}}%</p>
                         <img src="{{x.image_pro}}" alt="">
                     </div>
-                    <div class="title_detal">
+                    <div class="list_color">
+                        <div *ngFor="let item of x.color">
+                            <span class="color_but" (click)="getColorValue(item,i)" [class.checkedColor]="item.isChecked"
+                                [style.background-color]="item.code_color"></span>
+                        </div>
+                    </div>
+                    <div class="name_pro">
                         <span><a [routerLink]="[ '/clients/product_detail',x.idpro]"
                                 routerLinkActive="active">{{x.name_pro}}</a></span>
                     </div>
@@ -99,15 +99,24 @@
                             <span>{{x.price}}<sub>đ</sub></span>
                         </div>
                         <div class="button_detal">
-                            <button type="button" [routerLink]="[ '/clients/cart',x.idpro]" routerLinkActive="active">
+                            <button (click)="toggleButtonState(i)" type="button" routerLinkActive="active">
                                 <i class="fas fa-shopping-bag"></i>
                             </button>
+                            <div class="list_size-choose" [class.open]="buttonStates[i]">
+                                <span class="size-item btnn" *ngFor="let item of x.size" (click)="addCart(x,item)">
+                                    {{item}}
+                                </span>
+                            </div>
                         </div>
 
                     </div>
                 </div>
+
             </div>
-            <div class="paginate_product">
+            <div class="produc_all" *ngIf="product_list_women.length<=0">
+                <p style="font-size: 25px; color: #7f7f7f;">Không tìm thấy sản phẩm phù hợp !</p>
+            </div>
+            <div class="paginate_product" *ngIf="product_list_women.length>5">
                 <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
             </div>
         </div>

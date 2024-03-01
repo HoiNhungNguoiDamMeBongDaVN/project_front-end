@@ -86,12 +86,12 @@
                     </div>
                     <div class="list_color">
                         <div *ngFor="let item of x.color">
-                            <span class="color_but" (click)="getColorValue(item,i)" [class.checkedColor]="item.isChecked"
-                                [style.background-color]="item.code_color"></span>
+                            <span class="color_but" (click)="getColorValue(item,i)"
+                                [class.checkedColor]="item.isChecked" [style.background-color]="item.code_color"></span>
                         </div>
                     </div>
                     <div class="name_pro">
-                        <span><a [routerLink]="[ '/clients/product_detail',x.idpro]"
+                        <span><a [routerLink]="[ '/product_detail',x.idpro]"
                                 routerLinkActive="active">{{x.name_pro}}</a></span>
                     </div>
                     <div class="detal_pay">

@@ -18,7 +18,7 @@
                         </thead>
                         <tbody class="detail_table" *ngFor="let x of cart$|async;let n=index">
                             <td class="image">
-                                <div >
+                                <div>
                                     <img src="{{x.image_pro}}" alt="">
                                 </div>
                             </td>
@@ -54,7 +54,7 @@
                     </table>
 
                 </div>
-                <button class="btns" [routerLink]="[ '/clients/product_women' ]" routerLinkActive="active"><i
+                <button class="btns" [routerLink]="[ '/product_women' ]" routerLinkActive="active"><i
                         class="fa-solid fa-arrow-left-long"></i> Tiếp tục mua hàng</button>
             </div>
 
@@ -105,7 +105,7 @@
                 <i class="fas fa-shopping-cart"></i>
             </div>
             <p class="product_empty">Bạn chưa chọn sản phẩm</p>
-            <p class="cart_back" [routerLink]="[ '/clients/product_women' ]" routerLinkActive="active">
+            <p class="cart_back" [routerLink]="[ '/product_women' ]" routerLinkActive="active">
                 << Tiếp tục mua hàng ?</p>
         </div>
     </ng-template>

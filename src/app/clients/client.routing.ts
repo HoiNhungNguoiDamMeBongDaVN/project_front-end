@@ -13,10 +13,11 @@ import { ProductKidComponent } from './product-kid/product-kid.component';
 import { ProductSearchComponent } from './product-search/product-search.component';
 import { LoginCustomerComponent } from './login-customer/login-customer.component';
 import { RegisterCustomerComponent } from './register-customer/register-customer.component';
+import { DetailResolver } from '../resolvers/detail.resolver';
 
 const routes: Routes = [
     {
-        path: "clients",
+        path: "",
         component: LayoutclientComponent,
         children: [
             {
@@ -61,10 +62,6 @@ const routes: Routes = [
                 component: ChatComponent
             },
             {
-                path: "product_detail/:ID",
-                component: ProductDetailComponent
-            },
-            {
                 path: "cart/:ID",
                 component: CartComponent
             },
@@ -79,13 +76,24 @@ const routes: Routes = [
             {
                 path: "register_customer",
                 component: RegisterCustomerComponent
+            },
+            {
+                path: "product_detail/:ID",
+                component: ProductDetailComponent
             }
+            // {
+            //     path: "product_detail",
+            //     component: ProductDetailComponent,
+            //     resolve: {
+            //         detail: DetailResolver
+            //     }
+            // }
         ]
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
 export class ClientRoutingModule { }

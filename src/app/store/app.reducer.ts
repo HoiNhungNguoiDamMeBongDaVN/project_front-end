@@ -1,10 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
 import { addItemCart, deleteItemCart } from './app.action';
-import { ProductCart } from './appState/app.state';
+import { doGetAccountnManage } from './app.action';
+import { ProductCart } from './appState/product.state';
+import { UserManage } from './appState/user.state';
 
 const savedState = sessionStorage.getItem('cart');
+const savedStateUserManage = sessionStorage.getItem('savedStateUserManage');
 
 const initialState: ProductCart = savedState ? JSON.parse(savedState) : { cart: [] };
+const initialStateUser: UserManage = savedStateUserManage ? JSON.parse(savedStateUserManage) : {};
+// const initialStateUser: ReadonlyArray<UserManage> = [];
+
+
 
 export const itemsReducerCart = createReducer(
     initialState,
@@ -18,6 +25,7 @@ export const itemsReducerCart = createReducer(
             );
 
             const newState = { ...state, cart: updatedCart };
+
             sessionStorage.setItem('cart', JSON.stringify(newState));
             return newState;
         }
@@ -51,4 +59,17 @@ export const itemsReducerCart = createReducer(
         }
         return state;
     }),
-)
+);
+
+export const userManager = createReducer(
+    initialStateUser,
+    on(doGetAccountnManage, (state, { user }) => {
+
+        // const newState = { ...state, userInfor: [...state.userInfor, user] };
+        const newState = { ...state, user };
+
+        // sessionStorage.setItem('savedStateUserManage', JSON.stringify(newState));
+        return newState;
+    })
+);
+

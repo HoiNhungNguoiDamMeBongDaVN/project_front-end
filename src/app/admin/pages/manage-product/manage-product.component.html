@@ -1,30 +1,4 @@
 <div class="table_pro">
-  <!-- <table class="table table-striped table-hover" style="width: 100%;">
-        <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Image</th>
-              <th scope="col">Name</th>
-              <th scope="col">Price</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Sale</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let x of arrayProductAPI; let i=index;">
-              <th scope="row">{{i+1}}</th>
-              <td><img src="{{x.image}}" alt="" style="width: 120px; height:100% ;"></td>
-              <td>{{x.name}}</td>
-              <td>{{x.price}}<sub>đ</sub></td>
-              <td>{{x.amount}}</td>
-              <td style="color: red;">(-{{x.sale}})%</td>
-              <td><button type="button" class="btn btn-info" [routerLink]="[ '/admins/edit_product/',x.id_product]" routerLinkActive="active">Edit</button></td>
-              <td><button type="button" class="btn btn-danger" (click)="deleteProductItemAPI(x?.id_product)">Delete</button></td>
-            </tr>
-          </tbody>
-    </table> -->
   <table class="table table-borderless table-nowrap table-hover table-centered m-0">
 
     <thead class="table-light">

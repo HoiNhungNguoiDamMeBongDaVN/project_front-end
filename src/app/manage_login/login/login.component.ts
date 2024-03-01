@@ -20,13 +20,8 @@ export class LoginComponent implements OnInit {
 
   loginManage(x: any) {
     if (x.valid) {
-      console.log(x.value);
-
-
       this.loginLogoutService.getTokenManager(x.value).subscribe((res: any) => {
         if (res && res.errCode === 0) {
-          console.log(res.data);
-          
           this.manageLogin.checkAccountAdmin(res.data).then((res: any) => {
             this.router.navigate(['admins']);
           }).catch(() => {

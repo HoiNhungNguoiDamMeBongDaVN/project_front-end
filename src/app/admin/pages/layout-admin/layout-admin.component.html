@@ -8,7 +8,7 @@
             </div>
             <span class="text" *ngIf="collapsed">Ivymoda</span>
             <!-- <i class="close fas fa-times-circle" (click)="closeSidenav()" *ngIf="collapsed"></i> -->
-            <i class="close fas fa-angle-left"  (click)="closeSidenav()" *ngIf="collapsed"></i>
+            <i class="close fas fa-angle-left" (click)="closeSidenav()" *ngIf="collapsed"></i>
         </div>
         <ul class="sidenav-nav">
             <li class="sidenav-nav-item" *ngFor="let item of navData">
@@ -20,7 +20,11 @@
             </li>
         </ul>
     </div>
-    <div class="activity">
+    <div *ngIf="userAccountManage$ | async as userAccountManage">
+        <p>Email: {{ userAccountManage }}</p>
+        <!-- Thêm các trường khác của userInfo tại đây -->
+    </div>
+    <div class=" activity">
         <section class="header_admin">
             <div class="item">
                 <div class="search_icon">
@@ -35,6 +39,9 @@
                         <i class="fa-regular fa-comment" [routerLink]="[ 'chats_customer' ]"
                             routerLinkActive="active"></i>
                     </div>
+                    <!-- <div class="login_admin">
+                        <i class="fa-solid fa-arrow-right" (click)="logoutAccount()"></i>
+                    </div> -->
                     <div class="login_admin">
                         <i class="fa-solid fa-arrow-right" (click)="logoutAccount()"></i>
                     </div>

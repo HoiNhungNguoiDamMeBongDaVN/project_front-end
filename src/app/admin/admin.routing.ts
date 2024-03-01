@@ -13,54 +13,56 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
-        path:"admins",
-        component:LayoutAdminComponent,
-        canActivateChild:[GuardLoginAdminGuard],
-        children:[
+        path: "admins",
+        component: LayoutAdminComponent,
+        // canActivateChild: [GuardLoginAdminGuard],
+        // canLoad: [GuardLoginAdminGuard],
+        children: [
             {
-                path:"",
-                redirectTo:"dashboard",
-                pathMatch:"full" 
+                path: "",
+                redirectTo: "dashboard",
+                pathMatch: "full"
             },
             {
-                path:"dashboard",
-                component:DashboardComponent,
+                path: "dashboard",
+                component: DashboardComponent,
             },
             {
-                path:"manage_product",
-                component:ManageProductComponent,
+                path: "manage_product",
+                component: ManageProductComponent,
             },
             {
-                path:"add_product",
-                component:AddProductComponent,
+                path: "add_product",
+                component: AddProductComponent,
+                canDeactivate: [GuardLoginAdminGuard]
             },
             {
-                path:"chats_customer",
-                component:ChatsCustomerComponent
+                path: "chats_customer",
+                component: ChatsCustomerComponent
             },
             {
-                path:"charts_admin",
-                component:ChartsAdminComponent
+                path: "charts_admin",
+                component: ChartsAdminComponent
             },
             {
-                path:"order_cutomer",
-                component:OrderCustomerComponent
+                path: "order_cutomer",
+                component: OrderCustomerComponent
             },
             {
-                path:"edit_product/:ID",
-                component:EditProductComponent
+                path: "register",
+                component: RegisterComponentAccount
             },
             {
-                path:"register",
-                component:RegisterComponentAccount
-            }
-            
+                path: "edit_product/:ID",
+                component: EditProductComponent
+            },
+
         ]
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AdminRoutingModule { }

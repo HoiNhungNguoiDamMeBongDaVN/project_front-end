@@ -23,8 +23,8 @@ export class LayoutclientComponent implements OnInit {
   }
 
   receiveMessage() {
-    this.searchProduct.updateData(this.searchNameProduct);
+    this.searchProduct.searchProduct(this.searchNameProduct);
     this.searchNameProduct = '';
-    this.router.navigateByUrl('clients/product_search');
+    this.router.navigateByUrl('product_search');
   }
 }

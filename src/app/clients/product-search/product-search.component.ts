@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { debounceTime, startWith, switchMap } from 'rxjs';
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
 import { SearchProductService } from 'src/app/services/search_product/search-product.service';
 
@@ -31,20 +32,24 @@ export class ProductSearchComponent {
 
   getProductSearch() {
     try {
-      this.productService.searchProduct({ data: this.sendSearch }).subscribe(data => {
-        if (data && data.errCode === 0) {
-          this.listProductSearch = data.data;
-        }
-      }, error => {
-        console.error('An error occurred while fetching product data:', error);
-      });
+      if (this.sendSearch) {
+        this.productService.searchProduct({ data: this.sendSearch }).subscribe(data => {
+          if (data && data.errCode === 0) {
+            this.listProductSearch = data.data;
+          }
+        }, error => {
+          console.error('An error occurred while fetching product data:', error);
+        });
+      }
+      return;
     } catch (error) {
       console.error('An unexpected error occurred:', error);
     }
   }
 
+
   getAllColor() {
-    this.productService.getAllColor().subscribe((data:any) => {
+    this.productService.getAllColor().subscribe((data: any) => {
       if (data && data.errCode === 0) {
         this.listColor = data.data;
       }
@@ -52,7 +57,7 @@ export class ProductSearchComponent {
   }
 
   getAllSize() {
-    this.productService.getAllSize().subscribe((data:any) => {
+    this.productService.getAllSize().subscribe((data: any) => {
       if (data && data.errCode === 0) {
         this.listSize = data.data;
       }
@@ -91,7 +96,7 @@ export class ProductSearchComponent {
         color: this.listGetColor,
         titleSearch: this.sendSearch
       };
-      this.productService.filterAndSearchProduct({ data: data }).subscribe((data:any) => {
+      this.productService.filterAndSearchProduct({ data: data }).subscribe((data: any) => {
         if (data && data.errCode === 0) {
           this.listProductSearch = data.data;
         }

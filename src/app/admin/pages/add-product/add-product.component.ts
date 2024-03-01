@@ -1,22 +1,26 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { product } from 'src/app/models/product.model';
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
 import { VALIDATOR_ADD_PRODUCT } from "../../../utils/messages";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiCloudImageService } from 'src/app/services/api_image_cloud/api-cloud-image.service';
 import { MESS_CREATE_CONFIRM, ToastError, ToastSuccess } from 'src/app/utils/alert';
+import { CheckDeactivate } from 'src/app/interfaces/check-deactivate';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit, CheckDeactivate {
   editorForm: any;
   form: FormGroup;
   submit = false;
   checked = false;
+  isFormDirty = false;
+
 
   constructor(private apiProduct: ApiProductsService, private router: Router, private fb: FormBuilder, private apiCloudImage: ApiCloudImageService) {
     this.form = this.fb.group({
@@ -28,6 +32,9 @@ export class AddProductComponent implements OnInit {
       quantity: ['', Validators.compose([Validators.required])],
       des: ['', Validators.compose([Validators.required])],
       status: ['', Validators.compose([Validators.required])]
+    });
+    this.form.valueChanges.subscribe(() => {
+      this.isFormDirty = true;
     });
   }
 
@@ -135,17 +142,17 @@ export class AddProductComponent implements OnInit {
     let status_pro = form.value.status;
     let color = this.listGetColor;
     let size = this.listGetSize;
+    console.log(form.value, "me may");
 
     if (color.length <= 0 || size.length <= 0 || !type_pro_sex || !name_pro || !image_pro || !price || !sale || !quantity || !desprohtml || !status_pro || !color || !size) {
-      console.log("ma");
-
       this.errorValidateColor = VALIDATOR_ADD_PRODUCT.color;
       this.errorValidateTypeProduct = VALIDATOR_ADD_PRODUCT.type_sex;
       this.errorValidateColor = VALIDATOR_ADD_PRODUCT.size;
     }
     else {
-
       this.apiCloudImage.pushImageCloud({ data: this.converImage }).subscribe(image => {
+        console.log("cc");
+
         if (image && image.errCode === 0) {
           this.data = {
             name_pro: name_pro,
@@ -161,8 +168,7 @@ export class AddProductComponent implements OnInit {
           }
           this.apiProduct.addProduct({ data: this.data }).subscribe(res => {
             if (res) {
-              console.log(res);
-
+              this.isFormDirty = false;
               this.handleSuccess(MESS_CREATE_CONFIRM('sản phẩm thành công!'), 1000);
               this.router.navigateByUrl('/admins/manage_product');
             }
@@ -195,4 +201,16 @@ export class AddProductComponent implements OnInit {
       'form-control': true,
     };
   }
+
+
+
+  checkDeactivate(): Observable<boolean> {
+    if (!this.isFormDirty) {
+      return of(true);
+    }
+
+    const isAddProduct = JSON.stringify(this.form.value) !== JSON.stringify(null);
+    return of(!isAddProduct || confirm('Bạn có muốn thoát khỏi trang này?'));
+  }
+
 }

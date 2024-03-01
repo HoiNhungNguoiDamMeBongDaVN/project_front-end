@@ -5,11 +5,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SearchProductService {
   constructor() { }
-  
+
   private dataSubject = new BehaviorSubject<string>('');
   data$ = this.dataSubject.asObservable();
 
-  updateData(newData: string) {
+  searchProduct(newData: string) {
     this.dataSubject.next(newData);
   }
 }

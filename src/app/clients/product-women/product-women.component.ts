@@ -1,10 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, debounceTime, distinctUntilChanged, pluck } from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged, filter, from, of, pluck } from 'rxjs';
 import { search } from 'src/app/models/searchProduct.model';
 import { addItemCart } from 'src/app/store/app.action';
 
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
+import { partition } from 'rxjs/internal/operators/partition';
 @Component({
   selector: 'app-product-women',
   templateUrl: './product-women.component.html',
@@ -57,18 +58,15 @@ export class ProductWomenComponent implements OnInit {
   getProductWoment() {
     this.productService.getAllProduct().subscribe((data: { errCode: number; data: any[]; }) => {
       if (data && data.errCode === 0) {
-        this.product_list = data.data;
-        this.product_list.forEach((element: any) => {
-          if (element.type_pro_sex == "women") {
-            this.product_list_women.push(element);
-            this.listColorProduct = data.data[0].color;
-            //get value default
-
-          }
+        const [womenProducts$, otherProducts$] = partition((product: any) => product.type_pro_sex === 'women')(from(data.data));
+        womenProducts$.subscribe((womenProduct: any) => {
+          this.product_list_women.push(womenProduct);
+          this.listColorProduct = data.data[0].color;
         });
       }
-    })
+    });
   }
+
 
   getAllColor() {
     this.productService.getAllColor().subscribe((data: { errCode: number; data: any[]; }) => {
@@ -150,7 +148,7 @@ export class ProductWomenComponent implements OnInit {
       this.getProductWoment();
       this.listGetSize = [];
       this.listGetColor = [];
-      
+
     }
   }
 

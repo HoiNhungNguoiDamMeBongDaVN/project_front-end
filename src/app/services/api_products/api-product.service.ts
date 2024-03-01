@@ -5,7 +5,6 @@ import {
   GET_ALL_PRODUCT, GET_ALL_COLOR, GET_ALL_SIZE, CREATE_PRODUCT, GET_DETAIL_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, SEARCH_PRODUCT, FILTER_PRODUCT, FILTER_AND_SEARCH_PRODUCT
 } from "../enpoint"
 import { Observable, catchError, throwError } from 'rxjs';
-import { product } from '../../models/product.model';
 
 @Injectable({
   providedIn: 'root'

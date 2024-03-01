@@ -85,7 +85,7 @@
                         <img src="{{x.image_pro}}" alt="">
                     </div>
                     <div class="name_pro">
-                        <span><a [routerLink]="[ '/clients/product_detail',x.idpro]"
+                        <span><a [routerLink]="[ '/product_detail',x.idpro]"
                                 routerLinkActive="active">{{x.name_pro}}</a></span>
                     </div>
                     <div class="detal_pay">
@@ -93,7 +93,7 @@
                             <span>{{x.price}}<sub>đ</sub></span>
                         </div>
                         <div class="button_detal">
-                            <button type="button" [routerLink]="[ '/clients/cart',x.idpro]" routerLinkActive="active">
+                            <button type="button" [routerLink]="[ '/cart',x.idpro]" routerLinkActive="active">
                                 <i class="fas fa-shopping-bag"></i>
                             </button>
                         </div>

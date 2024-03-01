@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, of, pluck } from 'rxjs';
+import { Observable, map, of, pluck } from 'rxjs';
 import { product } from 'src/app/models/product.model';
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
 import { addItemCart } from 'src/app/store/app.action';
@@ -18,12 +18,13 @@ export class ProductDetailComponent implements OnInit {
   listSizeConvert: any[] = [];
   listColor: any[] = [];
   proDetail: {} | any;
+  proDetail$: Observable<any> | any;
   getSize: string | any;
   getColor: {} | any;
   quantity_product = 0;
   quantity_change = 1;
 
-  constructor(private router: ActivatedRoute, private productService: ApiProductsService, private store: Store) { }
+  constructor(private router: ActivatedRoute, private productService: ApiProductsService, private store: Store, private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.productDetail();
@@ -51,6 +52,9 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  // productDetail() {
+  //   this.proDetail$ = this.route.data.pipe(pluck('detail'));
+  // }
 
   convertSize(array: Array<any>) {
     array.map((item: any) => {

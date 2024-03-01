@@ -13,7 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { itemsReducerCart } from './store/app.reducer';
+import { itemsReducerCart, userManager } from './store/app.reducer';
 import { JwtModule } from '@auth0/angular-jwt';
 
 
@@ -32,7 +32,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    StoreModule.forRoot({ cart: itemsReducerCart }, {}),
+    StoreModule.forRoot({ cart: itemsReducerCart, user: userManager }, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     JwtModule.forRoot({
       config: {
@@ -43,7 +43,7 @@ import { JwtModule } from '@auth0/angular-jwt';
         disallowedRoutes: ['example.com/api/auth/login'], // (optional) Blacklist for requests
       },
     }),
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

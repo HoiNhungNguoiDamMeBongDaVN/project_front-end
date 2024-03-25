@@ -3,9 +3,12 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject, debounceTime, distinctUntilChanged, filter, from, of, pluck } from 'rxjs';
 import { search } from 'src/app/models/searchProduct.model';
 import { addItemCart } from 'src/app/store/app.action';
-
+import { SendDataService } from 'src/app/services/senddata/send_data.service';
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
 import { partition } from 'rxjs/internal/operators/partition';
+import { ApiCustomerService } from 'src/app/services/api_customer/api-customer.service';
+import { Router } from '@angular/router';
+import { FunctionAlert } from 'src/app/function_alert/function_alert';
 @Component({
   selector: 'app-product-women',
   templateUrl: './product-women.component.html',
@@ -14,7 +17,7 @@ import { partition } from 'rxjs/internal/operators/partition';
 export class ProductWomenComponent implements OnInit {
 
 
-  constructor(private productService: ApiProductsService, private store: Store) { }
+  constructor(private productService: ApiProductsService, private store: Store, private apiCustomerService: ApiCustomerService, private router: Router, private functionAlert: FunctionAlert) { }
 
   @ViewChild(ProductWomenComponent) toggleButton: ElementRef<HTMLButtonElement> | any;
 
@@ -158,35 +161,48 @@ export class ProductWomenComponent implements OnInit {
 
 
   addCart(product: any, size: any) {
-    if (this.getColor !== undefined) {
-      this.store.dispatch(addItemCart({
-        item: {
-          idpro: product.idpro,
-          name_pro: product.name_pro,
-          image_pro: product.image_pro,
-          price: product.price,
-          sale: product.sale,
-          quantity: 1,
-          color: this.getColor.name_c,
-          size: size
-        }
-      }))
+    let tokenCustomer = sessionStorage.getItem('curentAccountCustomer');
+    if (tokenCustomer === null) {
+      this.functionAlert.showAlertAndNavigate("Bạn cần đăng nhập để thực hiện chức năng này !", '/login_customer');
     }
     else {
-      this.store.dispatch(addItemCart({
-        item: {
-          idpro: product.idpro,
-          name_pro: product.name_pro,
-          image_pro: product.image_pro,
-          price: product.price,
-          sale: product.sale,
-          quantity: 1,
-          color: product.color[0].name_c,
-          size: size
+      let checkTokenCustomer = this.apiCustomerService.checkTokenExpiration(tokenCustomer);
+      if (checkTokenCustomer == true) {
+        if (this.getColor !== undefined) {
+          this.store.dispatch(addItemCart({
+            item: {
+              idpro: product.idpro,
+              name_pro: product.name_pro,
+              image_pro: product.image_pro,
+              price: product.price,
+              sale: product.sale,
+              quantity: 1,
+              color: this.getColor.name_c,
+              size: size
+            }
+          }))
         }
-      }))
+        else {
+          this.store.dispatch(addItemCart({
+            item: {
+              idpro: product.idpro,
+              name_pro: product.name_pro,
+              image_pro: product.image_pro,
+              price: product.price,
+              sale: product.sale,
+              quantity: 1,
+              color: product.color[0].name_c,
+              size: size
+            }
+          }))
+        }
+      }
+      else {
+        this.functionAlert.showAlertAndNavigate("Phiên đăng nhập của bạn đã hết, vui lòng đăng  nhập lại !", '/login_customer');
+      }
     }
   }
+
 
   toggleButtonState(index: number) {
     this.buttonStates[index] = !this.buttonStates[index];

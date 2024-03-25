@@ -18,5 +18,7 @@ export const VALIDATE_FORM_REGISTER = {
 
 export const CREATE_CUSTOMER = {
     success: 'Tạo tài khoản thành công',
-    error: 'Tạo tài khoản thất bại'
+    error: 'Tạo tài khoản thất bại',
+    account_exists: 'This account already exists'
+
 };

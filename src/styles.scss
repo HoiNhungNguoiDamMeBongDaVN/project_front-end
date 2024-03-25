@@ -216,6 +216,7 @@ html {
                 padding-left: 15px;
 
                 a {
+                    cursor: pointer;
                     color: rgb(26, 25, 25);
                 }
             }
@@ -1076,6 +1077,7 @@ html {
 
                         .image {
                             width: 20%;
+
                             img {
                                 width: 60%;
                                 padding: 0px 0px 10px 0px;
@@ -1083,14 +1085,16 @@ html {
                                 // width: 90%;
                             }
                         }
-                        
+
                         .name {
                             width: 25%;
+
                             span {
                                 @include text(15px);
                                 color: $text_product;
                             }
                         }
+
                         .sale {
                             width: 15%;
 

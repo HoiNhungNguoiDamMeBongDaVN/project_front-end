@@ -4,13 +4,14 @@ import { CREATE_CUSTOMER } from '../enpoint';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Customer } from 'src/app/models/customer.model';
 import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiCustomerService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) { }
 
   createCustomer(data: Customer): Observable<any> {
     const headers = new HttpHeaders({
@@ -25,4 +26,29 @@ export class ApiCustomerService {
       })
     )
   }
+
+  checkAccountCustomer(token: any) {
+    return new Promise((res, rej) => {
+      try {
+        if (token) {
+          sessionStorage.setItem("curentAccountCustomer", JSON.stringify(token));
+          res(token);
+        }
+      } catch (error) {
+        rej(error);
+      }
+    })
+  }
+
+  checkTokenExpiration(token: any) {
+    // const token = sessionStorage.getItem("curentAccountCustomer");
+
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      return true;
+    } else {
+      sessionStorage.removeItem('curentAccountCustomer');
+      return false;
+    }
+  }
+
 }

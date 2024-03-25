@@ -16,19 +16,21 @@
         <div>
             <li><a [routerLink]="[ 'myinformation' ]" routerLinkActive="active">Về chúng tôi</a></li>
         </div>
-        
+
     </nav>
     <div class="logo_header">
-        <a [routerLink]="[ 'indexs' ]" routerLinkActive="active"><img src="https://pubcdn2.ivymoda.com/images/logo.png" alt=""></a>
-        
+        <a [routerLink]="[ 'indexs' ]" routerLinkActive="active"><img src="https://pubcdn2.ivymoda.com/images/logo.png"
+                alt=""></a>
+
     </div>
-    <div class="menu_search-action"> 
+    <div class="menu_search-action">
         <div class="search_form">
             <form action="" method="post">
                 <button>
                     <i class="fa-solid fa-magnifying-glass" (click)="receiveMessage()"></i>
                 </button>
-                <input type="text" name="" id="search_header"  placeholder="Tìm kiếm ở đây" [(ngModel)]="searchNameProduct"  [ngModelOptions]="{standalone: true}">
+                <input type="text" name="" id="search_header" placeholder="Tìm kiếm ở đây"
+                    [(ngModel)]="searchNameProduct" [ngModelOptions]="{standalone: true}">
             </form>
         </div>
         <div class="header-action">
@@ -36,139 +38,139 @@
                 <a [routerLink]="[ 'chat' ]" routerLinkActive="active"><i class="fa-solid fa-headphones-simple"></i></a>
             </div>
             <div class="item">
-                <a  class="icon" [routerLink]="[ 'login_customer' ]" routerLinkActive="active">
-                    <i class="fa-solid fa-user-plus"></i>
+                <a class="icon" (click)="checkLoginCustomer()">
+                    <i class="fas fa-user"></i>
                 </a>
             </div>
             <div class="item cart_header">
                 <a [routerLink]="[ 'cart' ]" routerLinkActive="active"><i class="fa fa-shopping-bag"></i></a>
             </div>
-        </div> 
+        </div>
     </div>
 </section>
 <!-- ends header menu -->
 
-<router-outlet ></router-outlet>
+<router-outlet></router-outlet>
 <hr>
-    <!-- starts footer -->
-    <section class="footer gird">
-        <div class="list_top">
-            <div class="title">
-                <div class="logo">
-                    <a href="#">
-                        <img src="https://pubcdn2.ivymoda.com/images/logo.png" alt="">
-                    </a>
-                </div>
-                <div class="app">
-                    <a href="#">
-      
-                        <img src="https://pubcdn2.ivymoda.com/images/img-congthuong.png" alt="">
-                    </a>
-                </div>
+<!-- starts footer -->
+<section class="footer gird">
+    <div class="list_top">
+        <div class="title">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://pubcdn2.ivymoda.com/images/logo.png" alt="">
+                </a>
             </div>
-            <div class="content">
-      
-                <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0105777650</p>
-                <p><B>Địa chỉ đăng ký:</B>Tổ dân phố Tháp, P.Đại Mỗ, Q.Nam Từ Liêm, TP.Hà Nội, Việt Nam</p>
-                <p><B>Số điện thoại:</B>0234 056 2222</p>
+            <div class="app">
+                <a href="#">
+
+                    <img src="https://pubcdn2.ivymoda.com/images/img-congthuong.png" alt="">
+                </a>
             </div>
-            <div class="social">
-                <li>
-                    <a href="#">
-                        <i class="fa-brands fa-facebook-f"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-brands fa-google"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fab fa-twitter-square"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
-                </li>
-            </div>
+        </div>
+        <div class="content">
+
+            <p>Công ty Cổ phần Dự Kim với số đăng ký kinh doanh: 0105777650</p>
+            <p><B>Địa chỉ đăng ký:</B>Tổ dân phố Tháp, P.Đại Mỗ, Q.Nam Từ Liêm, TP.Hà Nội, Việt Nam</p>
+            <p><B>Số điện thoại:</B>0234 056 2222</p>
+        </div>
+        <div class="social">
+            <li>
+                <a href="#">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-brands fa-google"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fab fa-twitter-square"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </li>
+        </div>
+    </div>
+    <div class="list">
+        <div class="title">
+            <p>Giới thiệu</p>
         </div>
         <div class="list">
-            <div class="title">
-                <p>Giới thiệu</p>
-            </div>
-            <div class="list">
-                <li><a href="#">Về IVY moda</a></li>
-                <li><a href="#">Tuyển dụng</a></li>
-                <li><a href="#">Hệ thống cửa hàng</a></li>
-            </div>
+            <li><a href="#">Về IVY moda</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+            <li><a href="#">Hệ thống cửa hàng</a></li>
+        </div>
+    </div>
+    <div class="list">
+        <div class="title">
+            <p>Dịch vụ khách hàng</p>
         </div>
         <div class="list">
-            <div class="title">
-                <p>Dịch vụ khách hàng</p>
-            </div>
-            <div class="list">
-                <li><a href="#">Chính sách điều khoản</a></li>
-                <li><a href="#">Hướng dẫn mua hàng</a></li>
-                <li><a href="#">Chính sách thanh toán</a></li>
-                <li><a href="#">Chính sách đổi trả</a></li>
-                <li><a href="#">Chính sách bảo hàng</a></li>
-                <li><a href="#">Chính sách giao nhận vận chuyển</a></li>
-            </div>
+            <li><a href="#">Chính sách điều khoản</a></li>
+            <li><a href="#">Hướng dẫn mua hàng</a></li>
+            <li><a href="#">Chính sách thanh toán</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Chính sách bảo hàng</a></li>
+            <li><a href="#">Chính sách giao nhận vận chuyển</a></li>
+        </div>
+    </div>
+    <div class="list">
+        <div class="title">
+            <p>liên hệ</p>
         </div>
         <div class="list">
+            <li><a href="#">Hotline</a></li>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Live Chat</a></li>
+            <li><a href="#">Messenger</a></li>
+            <li><a href="#">Liên hệ</a></li>
+        </div>
+    </div>
+    <div class="list_buttom">
+        <div class="borders">
             <div class="title">
-                <p>liên hệ</p>
+                <p>Nhập thông tin các chương trình của IVY moda</p>
             </div>
-            <div class="list">
-                <li><a href="#">Hotline</a></li>
-                <li><a href="#">Email</a></li>
-                <li><a href="#">Live Chat</a></li>
-                <li><a href="#">Messenger</a></li>
-                <li><a href="#">Liên hệ</a></li>
+            <div class="input_information">
+                <form action="" method="post">
+                    <input type="email" name="" id="input" placeholder="Nhập địa chỉ Email" required="required">
+                    <button type="submit" class="btns">Đăng ký</button>
+                </form>
             </div>
         </div>
-        <div class="list_buttom">
-            <div class="borders">
-                <div class="title">
-                    <p>Nhập thông tin các chương trình của IVY moda</p>
-                </div>
-                <div class="input_information">
-                    <form action="" method="post"> 
-                        <input type="email" name="" id="input" placeholder="Nhập địa chỉ Email" required="required">
-                        <button type="submit" class="btns">Đăng ký</button>
-                    </form>
-                </div>
+        <div class="dowload">
+            <div class="title">
+                <p>Dowload APP</p>
             </div>
-            <div class="dowload">
-                <div class="title">
-                    <p>Dowload APP</p>
+            <div class="img_app">
+                <div class="app_store">
+                    <a href="#">
+                        <img src="https://pubcdn2.ivymoda.com/images/appstore.png" alt="">
+                    </a>
                 </div>
-                <div class="img_app">
-                    <div class="app_store">
-                        <a href="#">
-                            <img src="https://pubcdn2.ivymoda.com/images/appstore.png" alt="">
-                        </a>
-                    </div>
-                    <div class="google_play">
-                        <a href="#">
-                            <img src="https://pubcdn2.ivymoda.com/images/googleplay.png" alt="">
-                        </a>
-                    </div>
+                <div class="google_play">
+                    <a href="#">
+                        <img src="https://pubcdn2.ivymoda.com/images/googleplay.png" alt="">
+                    </a>
                 </div>
             </div>
         </div>
-      </section>
-    <!-- ends footer -->
-    <!-- starts author -->
-    <section class="author">
-        <p>©Ivymoda All rights reserved</p>
-    </section>
-    <!-- ends author -->
+    </div>
+</section>
+<!-- ends footer -->
+<!-- starts author -->
+<section class="author">
+    <p>©Ivymoda All rights reserved</p>
+</section>
+<!-- ends author -->

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { checkOut } from 'src/app/models/check.model';
 import { OrderCustomerService } from 'src/app/services/api_order/order-customer.service';
-
+import { selectItems } from 'src/app/store/app.selectors';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -10,10 +12,10 @@ import { OrderCustomerService } from 'src/app/services/api_order/order-customer.
 })
 export class OrderComponent implements OnInit {
 
-  constructor(private orderCart: OrderCustomerService) { }
+  constructor(private orderCart: OrderCustomerService, private store: Store) { }
 
   open: boolean = false;
-
+  cart$: Observable<any[]> | undefined;
   checkout: checkOut = new checkOut();
 
   listOderCart: checkOut[] = [];
@@ -22,8 +24,15 @@ export class OrderComponent implements OnInit {
   }
 
   loadOrderCart() {
-    this.listOderCart = this.orderCart.loadCartOder();
-    this.totalMoneyOrder();
+    this.cart$ = this.store.select(selectItems);
+    this.cart$.subscribe((data: any) => {
+      this.listOderCart = data;
+      console.log(data, "??");
+
+    });
+
+    // this.listOderCart = this.orderCart.loadCartOder();
+    // this.totalMoneyOrder();
   }
 
   openCartOrder() {

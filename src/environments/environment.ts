@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: "http://localhost:8080/api/v1/",
+  apiLoginLogoutCustomer: 'http://localhost:8080/api/v2/',
   sso_login: "http://localhost:8083/login",
   sso_logout: "http://localhost:8083/api/v1/logout",
   sso_get_account: "http://localhost:8083/api/v1/account",

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { debounceTime, startWith, switchMap } from 'rxjs';
 import { ApiProductsService } from 'src/app/services/api_products/api-product.service';
-import { SearchProductService } from 'src/app/services/search_product/search-product.service';
+import { SendDataService } from 'src/app/services/senddata/send_data.service';
 
 @Component({
   selector: 'app-product-search',
@@ -18,7 +18,7 @@ export class ProductSearchComponent {
   listColor: any[] = [];
   listSize: any[] = [];
   checked = false;
-  constructor(private searchProduct: SearchProductService, private productService: ApiProductsService) {
+  constructor(private searchProduct: SendDataService, private productService: ApiProductsService) {
     this.searchProduct.data$.subscribe((data: any) => {
       this.sendSearch = data;
       this.getProductSearch();

@@ -53,7 +53,7 @@ export class ApiAccountSSOService {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-                'Authorization': `Bearer  ${userAccount}`
+                // 'Authorization': `Bearer  ${userAccount}`
             }),
             withCredentials: true  // Enable sending credentials (cookies) with the request
         };

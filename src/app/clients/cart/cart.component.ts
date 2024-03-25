@@ -39,12 +39,15 @@ export class CartComponent implements OnInit {
 
   // NGRX
   getProduct() {
-    // this.cart$ = this.store.select(selectItems).pipe(
-    //   tap((cart: any) => { this.totalIntoMoneyPro = this.priceProvisional = this.sumPriceIntoMoneyPro(cart), this.totalPrice = this.sumPrice(cart), this.totalProduct = this.sumQuantity(cart) })
-    // );
+    this.cart$ = this.store.select(selectItems).pipe(
+      tap((cart: any) => { this.totalIntoMoneyPro = this.priceProvisional = this.sumPriceIntoMoneyPro(cart), this.totalPrice = this.sumPrice(cart), this.totalProduct = this.sumQuantity(cart) })
+    );
+
     this.cart$ = this.store.select(selectItems);
-    console.log(this.cart$);
-    
+    this.cart$.subscribe((data: any) => {
+      console.log(data)
+    });
+
   }
   sumPrice(pro: any[]) {
     let sumPrice = 0;
@@ -73,6 +76,8 @@ export class CartComponent implements OnInit {
 
   sumQuantity(pro: any[]) {
     let sumProduct = 0;
+    console.log("??");
+
     if (Array.isArray(pro)) {
       pro.forEach(item => {
         sumProduct += item.quantity

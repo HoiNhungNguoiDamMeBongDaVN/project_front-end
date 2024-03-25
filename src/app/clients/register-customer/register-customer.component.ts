@@ -63,16 +63,21 @@ export class RegisterCustomerComponent {
         if (password === again_password) {
           this.password_and_again_password_difference = '';
 
-          ToastSuccess(MESS_CREATE_CONFIRM("tài khoản thành công!"), 1000).then((res: any) => {
-            this.apiCustomerService.createCustomer(this.data).subscribe(res => {
-              if (res) {
-                this.router.navigateByUrl('/clients/login_customer');
-              }
-              else {
-                this.handleErorr(CREATE_CUSTOMER.error, 2000);
-              }
-            })
-          });
+          // ToastSuccess(MESS_CREATE_CONFIRM("tài khoản thành công!"), 1000).then((res: any) => {
+          // });
+          this.apiCustomerService.createCustomer(this.data).subscribe(res => {
+            if (res.errCode === 0) {
+              console.log(res);
+              this.handleSuccess(CREATE_CUSTOMER.success, 2000);
+              this.router.navigateByUrl('/login_customer');
+            }
+            else if (res.errCode === 2) {
+              this.handleErorr(CREATE_CUSTOMER.account_exists, 3000);
+            }
+            else {
+              this.handleErorr(CREATE_CUSTOMER.error, 3000);
+            }
+          })
 
         }
         else {

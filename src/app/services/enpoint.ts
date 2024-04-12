@@ -21,5 +21,6 @@ export const LOGIN_CUSTOMER = "customer-jwt";
 
 export const UPLOAD_IMAGE_CLOUD = "upload-image-clound-product";
 
+export const ADD_ORDER = "add-order-customer";
 
 export const CREATE_CUSTOMER = 'create-customer';

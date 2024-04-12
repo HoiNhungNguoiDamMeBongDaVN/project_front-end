@@ -151,7 +151,6 @@ export class AddProductComponent implements OnInit, CheckDeactivate {
     }
     else {
       this.apiCloudImage.pushImageCloud({ data: this.converImage }).subscribe(image => {
-        console.log("cc");
 
         if (image && image.errCode === 0) {
           this.data = {

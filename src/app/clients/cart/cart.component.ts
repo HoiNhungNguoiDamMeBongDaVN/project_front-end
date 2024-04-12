@@ -43,10 +43,10 @@ export class CartComponent implements OnInit {
       tap((cart: any) => { this.totalIntoMoneyPro = this.priceProvisional = this.sumPriceIntoMoneyPro(cart), this.totalPrice = this.sumPrice(cart), this.totalProduct = this.sumQuantity(cart) })
     );
 
-    this.cart$ = this.store.select(selectItems);
-    this.cart$.subscribe((data: any) => {
-      console.log(data)
-    });
+    // this.cart$ = this.store.select(selectItems);
+    // this.cart$.subscribe((data: any) => {
+    //   console.log(data)
+    // });
 
   }
   sumPrice(pro: any[]) {

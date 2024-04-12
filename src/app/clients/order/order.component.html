@@ -1,6 +1,6 @@
 <!-- starts pay -->
 <section class="order gird">
-    <form action="" method="post" #frmFormCustomer="ngForm" (submit)="order(frmFormCustomer)">
+    <form action="" method="post" [formGroup]="form" (submit)="order(form)">
         <div class="order_view">
 
             <div class="delivery_address">
@@ -9,64 +9,59 @@
                     <div class="infor_address">
 
                         <div class="infor_individual">
-                            <input type="text" required minlength="5" #fullName="ngModel"
-                                [(ngModel)]="checkout.customer.fullName" name="fullName" class="form-control"
-                                placeholder="Họ và tên">
-                            <div *ngIf="fullName.invalid && fullName.dirty">
+                            <input type="text" required minlength="5" formControlName="fullName" name="fullName"
+                                class="form-control" placeholder="Họ và tên">
+                            <!-- <div *ngIf="fullName.invalid && fullName.dirty">
                                 <strong *ngIf="fullName?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn
                                     cần nhập họ tên</strong>
                                 <strong *ngIf="fullName?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải
                                     lớn hơn 5 ký tự</strong>
-                            </div>
+                            </div> -->
 
-                            <input type="text" required minlength="5" #numberPhone="ngModel"
-                                [(ngModel)]="checkout.customer.numberPhone" class="form-control" name="numberPhone"
-                                id="" placeholder="Số điện thoại">
-                            <div *ngIf="numberPhone.invalid && numberPhone.dirty">
+                            <input type="text" required minlength="5" formControlName="phone" id=""
+                                placeholder="Số điện thoại">
+                            <!-- <div *ngIf="numberPhone.invalid && numberPhone.dirty">
                                 <strong *ngIf="numberPhone?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn
                                     cần nhập số điện thoại</strong>
                                 <strong *ngIf="numberPhone?.errors?.['minlength']"
                                     style="color: rgb(245, 119, 119);">Phải lớn hơn 5 ký tự</strong>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="infor_city-district">
-                            <input type="text" #province="ngModel" required minlength="5"
-                                [(ngModel)]="checkout.customer.province" class="form-control" name="province" id=""
+                            <input type="text" formControlName="province" class="form-control" name="province" id=""
                                 placeholder="Tỉnh/Thành phố">
-                            <div *ngIf="province.invalid && province.dirty">
+                            <!-- <div *ngIf="province.invalid && province.dirty">
                                 <strong *ngIf="province?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn
                                     cần nhập Tỉnh/Thành phố</strong>
                                 <strong *ngIf="province?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải
                                     lớn hơn 5 ký tự</strong>
-                            </div>
+                            </div> -->
 
-                            <input required minlength="5" #district="ngModel" [(ngModel)]="checkout.customer.district"
-                                type="text" class="form-control" name="district" id="" placeholder="Quận/Huyện">
-                            <div *ngIf="district.invalid && district.dirty">
+                            <input required minlength="5" formControlName="district" name="district" id=""
+                                placeholder="Quận/Huyện">
+                            <!-- <div *ngIf="district.invalid && district.dirty">
                                 <strong *ngIf="district?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn
                                     cần nhập Quận/Huyện</strong>
                                 <strong *ngIf="district?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải
                                     lớn hơn 5 ký tự</strong>
-                            </div>
+                            </div> -->
                         </div>
-                        <input type="text" required minlength="5" #wards="ngModel" [(ngModel)]="checkout.customer.wards"
-                            name="wards" class="form-control" id="" placeholder="Phường/Xã">
-                        <div *ngIf="wards.invalid && wards.dirty">
+                        <input type="text" required minlength="5" formControlName="ward" placeholder="Phường/Xã">
+                        <!-- <div *ngIf="wards.invalid && wards.dirty">
                             <strong *ngIf="wards?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần nhập
                                 Xã/Phường</strong>
                             <strong *ngIf="wards?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn
                                 hơn 5 ký tự</strong>
-                        </div>
+                        </div> -->
 
-                        <input type="text" required minlength="5" #address="ngModel"
-                            [(ngModel)]="checkout.customer.address" name="address" class="form-control" id=""
+                        <input type="text" required minlength="5" formControlName="address" class="form-control" id=""
                             placeholder="Địa chỉ">
-                        <div *ngIf="address.invalid && address.dirty">
+                        <!-- <div *ngIf="address.invalid && address.dirty">
                             <strong *ngIf="address?.errors?.['required']" style="color: rgb(241, 57, 57);">Bạn cần
                                 nhập địa chỉ</strong>
                             <strong *ngIf="address?.errors?.['minlength']" style="color: rgb(245, 119, 119);">Phải lớn
                                 hơn 5 ký tự</strong>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="method_checks">
@@ -76,23 +71,23 @@
                             <p class="title_pay">Mọi giao dịch đều được bảo mật và mã hóa. Thông tin thẻ tín dụng sẽ
                                 không bao giờ được lưu lại.</p>
                             <div class="pay_cart">
-                                <input type="radio" [(ngModel)]="checkout.pay.methodPay" id="" name="method1"
+                                <input type="radio" formControlName="methodPay" id="" name="method1"
                                     value="Thanh toán bằng thẻ tín dụng">
                                 <label>Thanh toán bằng thẻ tín dụng</label>
                                 <img src="https://pubcdn2.ivymoda.com/images/1.png" alt="">
                             </div>
                             <div class="pay_other">
-                                <input type="radio" [(ngModel)]="checkout.pay.methodPay" id="" name="method2"
+                                <input type="radio" formControlName="methodPay" id="" name="method2"
                                     value="Thanh toán qua thẻ ATM">
                                 <label for="">Thanh toán qua thẻ ATM</label>
                             </div>
                             <div class="pay_other">
-                                <input type="radio" id="" [(ngModel)]="checkout.pay.methodPay" name="method3"
+                                <input type="radio" id="" formControlName="methodPay" name="method3"
                                     value="Thanh toán bằng Momo">
                                 <label for="">Thanh toán bằng Momo</label>
                             </div>
                             <div class="pay_other">
-                                <input type="radio" id="" [(ngModel)]="checkout.pay.methodPay" name="method4"
+                                <input type="radio" id="" formControlName="methodPay" name="method4"
                                     value="Thanh toán khi giao hàng">
                                 <label for="">Thanh toán khi giao hàng</label>
                             </div>
@@ -129,8 +124,7 @@
                         Mã phiếu giảm giá
                     </p>
                     <div class="coupon_code">
-                        <input type="text" #discountCode="ngModel" [(ngModel)]="checkout.customer.discountCode"
-                            name="discountCode" id="" placeholder="Nhập mã">
+                        <input type="text" formControlName="discountCode" id="" placeholder="Nhập mã">
                     </div>
                     <div class="button_pay">
                         <button class="btnr" type="submit">Thanh toán đơn hàng</button>
@@ -190,9 +184,9 @@
 
 
 
-                    <!-- <tbody *ngFor="let x of listOderCart">
+                    <tbody *ngFor="let x of listOderCart">
 
-                        <tr class="detail_table" >
+                        <tr class="detail_table">
                             <td class="image">
                                 <img src="{{x.image_pro}}" alt="">
                             </td>
@@ -202,7 +196,7 @@
                                 </span>
                             </td>
                             <td class="sale">
-                                <span *ngIf="i.sale>0">
+                                <span *ngIf="x.sale>0">
                                     (-{{x.sale}}%)
                                 </span>
                             </td>
@@ -210,17 +204,17 @@
                                 <span>{{x.price}}<sub>đ</sub></span>
                             </td>
                             <td class="price">
-                               <span>
-                                {{x.amount}}
-                               </span>
+                                <span>
+                                    {{x.quantity}}
+                                </span>
                             </td>
                             <td class="total">
                                 <span>
-                                    {{x.amount*i.price}} <sub>đ</sub>
+                                    {{x.quantity*x.price}} <sub>đ</sub>
                                 </span>
                             </td>
                         </tr>
-                    </tbody> -->
+                    </tbody>
 
 
 

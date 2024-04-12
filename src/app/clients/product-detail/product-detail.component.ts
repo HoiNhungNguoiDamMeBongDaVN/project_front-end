@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   checkedColor = false;
   listSizeConvert: any[] = [];
   listColor: any[] = [];
+  listSize: any[] = [];
   proDetail: {} | any;
   proDetail$: Observable<any> | any;
   getSize: string | any;
@@ -47,18 +48,24 @@ export class ProductDetailComponent implements OnInit {
           this.proDetail = productData;
           this.quantity_product = productData[0].quantity;
           this.listColor = productData[0]?.color;
-          this.convertSize(productData[0]?.size);
+          this.filterSizeInProductDetail(productData[0]?.size);
           this.getColorValue(this.listColor);
         }
       });
     });
   }
 
-  // productDetail() {
-  //   this.proDetail$ = this.route.data.pipe(pluck('detail'));
-  // }
+  filterSizeInProductDetail(size: Array<any>) {
+    size.forEach((item: any) => {
+      this.listSize.push(item.name_s);
+    });
+    this.convertSize(this.listSize);
+    
+  }
+
 
   convertSize(array: Array<any>) {
+
     array.map((item: any) => {
       let object = {
         isChecked: 1,
@@ -77,6 +84,7 @@ export class ProductDetailComponent implements OnInit {
       this.getSize = size.name_s;
       this.listSizeConvert.forEach(item => {
         if (item !== size) {
+
           item.isChecked = false;
         }
       });

@@ -14,8 +14,6 @@ export class ApiOrderCustomerService {
     constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) { }
 
     addOrderCustomer(data: any): Observable<any> {
-        console.log(data);
-        
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',

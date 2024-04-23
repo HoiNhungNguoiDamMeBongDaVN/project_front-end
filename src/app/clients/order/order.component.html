@@ -71,23 +71,23 @@
                             <p class="title_pay">Mọi giao dịch đều được bảo mật và mã hóa. Thông tin thẻ tín dụng sẽ
                                 không bao giờ được lưu lại.</p>
                             <div class="pay_cart">
-                                <input type="radio" formControlName="methodPay" id="" name="method1"
+                                <input type="radio" formControlName="methodPay" id="" name="methodPay"
                                     value="Thanh toán bằng thẻ tín dụng">
                                 <label>Thanh toán bằng thẻ tín dụng</label>
                                 <img src="https://pubcdn2.ivymoda.com/images/1.png" alt="">
                             </div>
                             <div class="pay_other">
-                                <input type="radio" formControlName="methodPay" id="" name="method2"
+                                <input type="radio" formControlName="methodPay" id="" name="methodPay"
                                     value="Thanh toán qua thẻ ATM">
                                 <label for="">Thanh toán qua thẻ ATM</label>
                             </div>
                             <div class="pay_other">
-                                <input type="radio" id="" formControlName="methodPay" name="method3"
+                                <input type="radio" id="" formControlName="methodPay" name="methodPay"
                                     value="Thanh toán bằng Momo">
                                 <label for="">Thanh toán bằng Momo</label>
                             </div>
                             <div class="pay_other">
-                                <input type="radio" id="" formControlName="methodPay" name="method4"
+                                <input type="radio" id="" formControlName="methodPay" name="methodPay"
                                     value="Thanh toán khi giao hàng">
                                 <label for="">Thanh toán khi giao hàng</label>
                             </div>
@@ -150,39 +150,6 @@
                         <th>Số lượng</th>
                         <th>Tổng tiền</th>
                     </tr>
-                    <!-- <tbody *ngFor="let x of listOderCart">
-
-                        <tr class="detail_table" *ngFor="let i of x.carts;let n=index">
-                            <td class="image">
-                                <img src="../../../../assets/images/{{i.image}}" alt="">
-                            </td>
-                            <td class="name">
-                                <span>
-                                    {{i.name}}
-                                </span>
-                            </td>
-                            <td class="sale">
-                                <span *ngIf="i.sale>0">
-                                    (-{{i.sale}}%)
-                                </span>
-                            </td>
-                            <td class="price">
-                                <span>{{i.price}}<sub>đ</sub></span>
-                            </td>
-                            <td class="price">
-                               <span>
-                                {{i.amount}}
-                               </span>
-                            </td>
-                            <td class="total">
-                                <span>
-                                    {{i.amount*i.price}} <sub>đ</sub>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody> -->
-
-
 
                     <tbody *ngFor="let x of listOderCart">
 

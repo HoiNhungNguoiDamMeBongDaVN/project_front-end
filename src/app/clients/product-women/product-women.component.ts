@@ -63,8 +63,6 @@ export class ProductWomenComponent implements OnInit {
       if (data && data.errCode === 0) {
         const [womenProducts$, otherProducts$] = partition((product: any) => product.type_pro_sex === 'women')(from(data.data));
         womenProducts$.subscribe((womenProduct: any) => {
-          console.log(womenProduct);
-          
           this.product_list_women.push(womenProduct);
           this.listColorProduct = data.data[0].color;
         });
@@ -148,7 +146,7 @@ export class ProductWomenComponent implements OnInit {
   }
 
   cancelFilterProduct() {
-    if (this.listGetSize.length > 0 || this.listGetColor.length > 0) {
+    if (this.listGetSize.length <= 0 || this.listGetColor.length <= 0) {
       this.product_list_women = [];
       this.getProductWoment();
       this.listGetSize = [];

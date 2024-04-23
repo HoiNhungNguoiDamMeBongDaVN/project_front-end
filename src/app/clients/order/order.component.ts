@@ -53,8 +53,6 @@ export class OrderComponent implements OnInit {
   }
 
   totalMoneyOrder() {
-    console.log("cc", this.listOderCart);
-
     let totalProduct = 0;
     let totalPrice = 0;
     let totalPriceSale = 0;
@@ -63,13 +61,6 @@ export class OrderComponent implements OnInit {
       totalPrice += element.price * element.quantity;
       totalPriceSale += (element.price * element.quantity) * ((100 - element.sale) / 100);
       totalProduct += element.quantity;
-      // for (let i = 0; i < element.carts.length; i++) {
-      //   const e = element.carts[i];
-      //   this.checkout.carts.push(e);
-      //   totalPrice += e.price * e.amount;
-      //   totalPriceSale += (e.price * e.amount) * ((100 - e.sale) / 100);
-      //   totalProduct += e.amount;
-      // }
     }
     this.checkout.totalAmount = totalProduct;
     this.checkout.totalPriceProduct = totalPrice;
@@ -85,11 +76,13 @@ export class OrderComponent implements OnInit {
 
 
   order(form: FormGroup) {
-    if (form.value.fullName !== '' || form.value.province !== '' || form.value.district !== '' || form.value.ward !== '' || form.value.address !== '') {
+
+    if (form.value.fullName !== '', form.value.phone || form.value.province !== '' || form.value.district !== '' || form.value.ward !== '' || form.value.address !== '') {
       let data = {
         customer: form.value.fullName,
-        product: this.listOderCart,
-        address_delivery: [form.value.province, form.value.district, form.value.ward, form.value.address],
+        product: JSON.stringify(this.listOderCart),
+        number_phone: form.value.phone,
+        address_delivery: JSON.stringify([form.value.province, form.value.district, form.value.ward, form.value.address]),
         method_pay: form.value.methodPay,
         discountCode: form.value.discountCode,
         quantity_pro: this.listOderCart.length,

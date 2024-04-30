@@ -1,7 +1,7 @@
 <!-- starts category -->
 <section class="category gird">
     <div class="list_address">
-        <span>Trang chủ - Hàng Trẻ Em</span>
+        <span>Trang chủ - Hàng trẻ em</span>
     </div>
     <div class="list_product row">
         <div class="category_left col-lg-3">
@@ -17,7 +17,7 @@
                             </div>
                             <div class="collapse" id="size">
                                 <div class="list_size">
-                                    <button class="size_but" (click)="getSizeValue(item)"
+                                    <button class="size_but" (click)="getSizeValueFilter(item)"
                                         [class.checked]="item.isChecked"
                                         *ngFor="let item of listSize">{{item.name_s}}</button>
                                 </div>
@@ -32,7 +32,7 @@
                             <div class="collapse" id="color">
                                 <div class="list_color">
                                     <div *ngFor="let item of listColor">
-                                        <span class="color_but" (click)="getColorValue(item)"
+                                        <span class="color_but" (click)="getColorValueFilter(item)"
                                             [class.checked]="item.isChecked"
                                             [style.background-color]="item.code_color"></span>
                                     </div>
@@ -74,15 +74,21 @@
         </div>
         <div class="category_right col-lg-9">
             <div class="title_detail">
-                <span>Quần áo trẻ em</span>
+                <span>Quần áo nữ</span>
             </div>
             <div class="produc_all row" *ngIf="product_list_kid.length>0">
 
                 <div class="boxs col-lg-3"
-                    *ngFor="let x of product_list_kid | paginate:{itemsPerPage:4, currentPage:p}">
+                    *ngFor="let x of product_list_kid | paginate:{itemsPerPage:4, currentPage:p} ;let i = index">
                     <div class="image">
                         <p class="sale" *ngIf="x.sale>1">-{{x.sale}}%</p>
                         <img src="{{x.image_pro}}" alt="">
+                    </div>
+                    <div class="list_color">
+                        <div *ngFor="let item of x.color">
+                            <span class="color_but" (click)="getColorValue(item,i)"
+                                [class.checkedColor]="item.isChecked" [style.background-color]="item.code_color"></span>
+                        </div>
                     </div>
                     <div class="name_pro">
                         <span><a [routerLink]="[ '/product_detail',x.idpro]"
@@ -93,9 +99,15 @@
                             <span>{{x.price}}<sub>đ</sub></span>
                         </div>
                         <div class="button_detal">
-                            <button type="button" [routerLink]="[ '/cart',x.idpro]" routerLinkActive="active">
+                            <button (click)="toggleButtonState(i)" type="button" routerLinkActive="active">
                                 <i class="fas fa-shopping-bag"></i>
                             </button>
+                            <div class="list_size-choose" [class.open]="buttonStates[i]">
+                                <!-- // -->
+                                <span class="btnn_hover size-item " *ngFor="let item of x.size" (click)="addCart(x,item.name_s)">
+                                    {{item.name_s}}
+                                </span>
+                            </div>
                         </div>
 
                     </div>
@@ -110,13 +122,13 @@
             </div>
         </div>
     </div>
-    <!-- <div class="detal_infor">
+    <div class="detal_infor">
         <span>
             <B> Chân váy </B>là một trong những trang phục quen thuộc đối với mỗi cô gái và là món “bảo bối” không thể
             thiếu trong tủ đồ của mỗi chị em. Chỉ cần biết cách phối đồ chút là bạn đã có một outfit thật tuyệt chào đón
             ngày mới. Hãy để Thời Trang IVY moda giới thiệu tới các bạn top những chân váy, mẫu chân váy dài, chân váy
             ngắn, chân váy chữ A, chân váy dài, các kiểu chân váy đẹp nhất hiện nay chỉ có tại IVY moda nhé.
         </span>
-    </div> -->
+    </div>
 </section>
 <!-- ends category -->
